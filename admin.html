@@ -3,136 +3,894 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>لوحة نشر الأخبار - شبكة سوريا نيوز</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:#f1f3f5;
-    color:#222;
+    padding:15px;
+    background:#eef1f5;
+    font-family:Arial,Tahoma,sans-serif;
 }
-
-header{
-    background:#111827;
-    color:white;
-    padding:22px;
-    text-align:center;
-}
-
-header h1{margin:0 0 8px}
-header p{margin:0;opacity:.85}
 
 .container{
-    max-width:800px;
-    margin:30px auto;
-    padding:20px;
+    max-width:750px;
+    margin:auto;
 }
 
-.card{
+.box{
     background:white;
-    border-radius:16px;
-    padding:25px;
+    padding:20px;
+    border-radius:18px;
     box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+h1{
+    text-align:center;
+    margin-top:0;
+    color:#111;
 }
 
 label{
     display:block;
-    margin-top:17px;
-    margin-bottom:7px;
     font-weight:bold;
+    margin-top:15px;
+    margin-bottom:6px;
 }
 
-input,select,textarea{
+input,
+textarea,
+select{
     width:100%;
     padding:13px;
-    border:1px solid #d1d5db;
-    border-radius:9px;
+    border:1px solid #ccc;
+    border-radius:10px;
     font-size:16px;
-    font-family:inherit;
+    background:white;
 }
 
 textarea{
-    min-height:220px;
+    min-height:200px;
     resize:vertical;
+}
+
+.file-box{
+    margin-top:15px;
+    padding:15px;
+    background:#f7f8fa;
+    border-radius:12px;
+    border:1px solid #ddd;
+}
+
+.file-box input{
+    margin-top:8px;
+    padding:8px;
+}
+
+.preview{
+    margin-top:10px;
+    max-width:100%;
+    border-radius:10px;
 }
 
 button{
     width:100%;
-    margin-top:22px;
-    padding:15px;
     border:0;
-    border-radius:9px;
-    background:#111827;
-    color:white;
+    padding:15px;
+    margin-top:18px;
+    border-radius:11px;
     font-size:17px;
-    cursor:pointer;
+    font-weight:bold;
+    background:#1683ff;
+    color:white;
 }
 
 button:disabled{
-    opacity:.6;
+    background:#888;
 }
 
-#status{
-    display:none;
+.clear{
+    background:#555;
+}
+
+.status{
     margin-top:15px;
-    padding:12px;
-    border-radius:9px;
+    padding:14px;
+    border-radius:10px;
+    background:#f0f0f0;
+    white-space:pre-wrap;
 }
 
-.success{
-    background:#ecfdf5;
-    color:#166534;
-}
-
-.error{
-    background:#fef2f2;
-    color:#991b1b;
-}
-
-.back{
-    display:block;
+.note{
+    margin-top:10px;
+    font-size:13px;
+    color:#666;
     text-align:center;
-    margin-top:20px;
-    color:#111827;
-    text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🇸🇾 لوحة نشر الأخبار</h1>
-    <p>شبكة سوريا نيوز — إدارة الأخبار</p>
-</header>
-
 <div class="container">
-<div class="card">
 
-<h2>📰 نشر خبر جديد</h2>
+<div class="box">
 
-<label>عنوان الخبر</label>
-<input id="title" type="text" placeholder="اكتب عنوان الخبر...">
+<h1>📰 شبكة سوريا نيوز 🇸🇾</h1>
 
-<label>تصنيف الخبر</label>
+<label>🔐 GitHub Token</label>
+<input
+    id="token"
+    type="password"
+    placeholder="ضع GitHub Token هنا"
+>
+
+<label>📰 عنوان الخبر</label>
+<input
+    id="title"
+    type="text"
+    placeholder="اكتب عنوان الخبر"
+>
+
+<label>🏷️ تصنيف الخبر</label>
 <select id="category">
-    <option value="عاجل">عاجل</option>
-    <option value="سوريا">سوريا</option>
-    <option value="حلب">حلب</option>
-    <option value="إدلب">إدلب</option>
-    <option value="أخبار عامة">أخبار عامة</option>
+    <option value="عاجل">🔴 عاجل</option>
+    <option value="سوريا">🇸🇾 سوريا</option>
+    <option value="حرب">⚔️ حرب</option>
+    <option value="أمن">🛡️ أمن</option>
+    <option value="سياسة">🏛️ سياسة</option>
+    <option value="اقتصاد">💰 اقتصاد</option>
+    <option value="دولي">🌍 دولي</option>
+    <option value="محلي">📍 محلي</option>
 </select>
 
-<label>نص الخبر</label>
-<textarea id="content" placeholder="اكتب نص الخبر هنا..."></textarea>
+<label>📍 المكان</label>
+<input
+    id="location"
+    type="text"
+    placeholder="مثال: حلب - ريف حلب"
+>
 
-<label>رابط صورة الخبر - اختياري</label>
-<input id="image" type="url" placeholder="https://...">
+<label>✍️ المصدر / الكاتب</label>
+<input
+    id="source"
+    type="text"
+    placeholder="مثال: شبكة سوريا نيوز"
+>
 
-<label>GitHub Token</label>
-<input id="token" type="password" placeholder="الصق التوكن هنا">
+<label>📝 نص الخبر</label>
+<textarea
+    id="content"
+    placeholder="اكتب نص الخبر هنا..."
+></textarea>
 
-<button id="publishBtn" onclick
+<div class="file-box">
+
+    <b>🖼️ الصورة الرئيسية</b>
+
+    <input
+        id="imageFile"
+        type="file"
+        accept="image/*"
+        onchange="previewImage()"
+    >
+
+    <img
+        id="imagePreview"
+        class="preview"
+        style="display:none"
+    >
+
+</div>
+
+<div class="file-box">
+
+    <b>🎥 الفيديو</b>
+
+    <input
+        id="videoFile"
+        type="file"
+        accept="video/*"
+    >
+
+</div>
+
+<div class="file-box">
+
+    <b>🎙️ المقطع الصوتي</b>
+
+    <input
+        id="audioFile"
+        type="file"
+        accept="audio/*"
+    >
+
+</div>
+
+<button
+    id="publishButton"
+    onclick="publishNews()"
+>
+🚀 نشر الخبر
+</button>
+
+<button
+    class="clear"
+    onclick="clearForm()"
+>
+🗑️ مسح الحقول
+</button>
+
+<div
+    id="status"
+    class="status"
+>
+جاهز للنشر.
+</div>
+
+<div class="note">
+شبكة سوريا نيوز 🇸🇾
+</div>
+
+</div>
+</div>
+
+<script>
+
+const CLOUD_NAME = "hagyoalb";
+const UPLOAD_PRESET = "syria_news";
+
+const GITHUB_REPO = "ahajqdwr96-arch/syria-news";
+const NEWS_FILE = "news.json";
+
+
+function status(message){
+
+    document.getElementById("status").textContent = message;
+
+}
+
+
+function previewImage(){
+
+    const file =
+        document.getElementById("imageFile").files[0];
+
+    const preview =
+        document.getElementById("imagePreview");
+
+    if(!file){
+
+        preview.style.display = "none";
+
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        preview.src = e.target.result;
+
+        preview.style.display = "block";
+
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+async function uploadCloudinary(file,type){
+
+    if(!file){
+
+        return "";
+    }
+
+    let resourceType = "image";
+
+    if(type === "video" || type === "audio"){
+
+        resourceType = "video";
+
+    }
+
+    const url =
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`;
+
+    const formData = new FormData();
+
+    formData.append("file",file);
+
+    formData.append(
+        "upload_preset",
+        UPLOAD_PRESET
+    );
+
+    const response = await fetch(
+        url,
+        {
+            method:"POST",
+            body:formData
+        }
+    );
+
+    if(!response.ok){
+
+        const errorText =
+            await response.text();
+
+        throw new Error(
+            "فشل رفع الملف:\n" +
+            errorText
+        );
+
+    }
+
+    const data =
+        await response.json();
+
+    return data.secure_url;
+}
+
+
+async function getNews(token){
+
+    const url =
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${NEWS_FILE}`;
+
+    const response = await fetch(
+        url,
+        {
+            headers:{
+                "Authorization":
+                    `Bearer ${token}`,
+
+                "Accept":
+                    "application/vnd.github+json",
+
+                "X-GitHub-Api-Version":
+                    "2022-11-28"
+            }
+        }
+    );
+
+    if(response.status === 404){
+
+        return {
+            news:[],
+            sha:null
+        };
+
+    }
+
+    if(!response.ok){
+
+        const error =
+            await response.text();
+
+        throw new Error(
+            "تعذر قراءة الأخبار من GitHub:\n" +
+            error
+        );
+
+    }
+
+    const data =
+        await response.json();
+
+    const binary =
+        atob(
+            data.content.replace(/\n/g,"")
+        );
+
+    const bytes =
+        Uint8Array.from(
+            binary,
+            c => c.charCodeAt(0)
+        );
+
+    const text =
+        new TextDecoder("utf-8")
+        .decode(bytes);
+
+    let news =
+        JSON.parse(text);
+
+    if(!Array.isArray(news)){
+
+        news = [];
+
+    }
+
+    return {
+        news:news,
+        sha:data.sha
+    };
+}
+
+
+async function saveNews(
+    token,
+    news,
+    sha
+){
+
+    const url =
+        `https://api.github.com/repos/${GITHUB_REPO}/contents/${NEWS_FILE}`;
+
+    const json =
+        JSON.stringify(
+            news,
+            null,
+            2
+        );
+
+    const bytes =
+        new TextEncoder()
+        .encode(json);
+
+    let binary = "";
+
+    for(const byte of bytes){
+
+        binary +=
+            String.fromCharCode(byte);
+
+    }
+
+    const encoded =
+        btoa(binary);
+
+    const body = {
+
+        message:
+            "نشر خبر جديد",
+
+        content:
+            encoded,
+
+        branch:
+            "main"
+
+    };
+
+    if(sha){
+
+        body.sha = sha;
+
+    }
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"PUT",
+
+                headers:{
+
+                    "Authorization":
+                        `Bearer ${token}`,
+
+                    "Accept":
+                        "application/vnd.github+json",
+
+                    "X-GitHub-Api-Version":
+                        "2022-11-28",
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(body)
+            }
+        );
+
+    if(!response.ok){
+
+        const error =
+            await response.text();
+
+        throw new Error(error);
+
+    }
+
+    return true;
+}
+
+
+async function publishNews(){
+
+    const button =
+        document.getElementById(
+            "publishButton"
+        );
+
+    const token =
+        document.getElementById(
+            "token"
+        ).value.trim();
+
+    const title =
+        document.getElementById(
+            "title"
+        ).value.trim();
+
+    const category =
+        document.getElementById(
+            "category"
+        ).value;
+
+    const location =
+        document.getElementById(
+            "location"
+        ).value.trim();
+
+    const source =
+        document.getElementById(
+            "source"
+        ).value.trim();
+
+    const content =
+        document.getElementById(
+            "content"
+        ).value.trim();
+
+    const imageFile =
+        document.getElementById(
+            "imageFile"
+        ).files[0];
+
+    const videoFile =
+        document.getElementById(
+            "videoFile"
+        ).files[0];
+
+    const audioFile =
+        document.getElementById(
+            "audioFile"
+        ).files[0];
+
+
+    if(!token){
+
+        status("❌ ضع GitHub Token أولاً.");
+
+        return;
+    }
+
+    if(!title){
+
+        status("❌ اكتب عنوان الخبر.");
+
+        return;
+    }
+
+    if(!content){
+
+        status("❌ اكتب نص الخبر.");
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    try{
+
+        let image = "";
+        let video = "";
+        let audio = "";
+
+
+        if(imageFile){
+
+            status(
+                "⏳ جاري رفع الصورة..."
+            );
+
+            image =
+                await uploadCloudinary(
+                    imageFile,
+                    "image"
+                );
+        }
+
+
+        if(videoFile){
+
+            status(
+                "⏳ جاري رفع الفيديو..."
+            );
+
+            video =
+                await uploadCloudinary(
+                    videoFile,
+                    "video"
+                );
+        }
+
+
+        if(audioFile){
+
+            status(
+                "⏳ جاري رفع المقطع الصوتي..."
+            );
+
+            audio =
+                await uploadCloudinary(
+                    audioFile,
+                    "audio"
+                );
+        }
+
+
+        status(
+            "⏳ جاري قراءة الأخبار..."
+        );
+
+        const result =
+            await getNews(token);
+
+
+        const newsItem = {
+
+            id:
+                Date.now(),
+
+            title:
+                title,
+
+            content:
+                content,
+
+            category:
+                category,
+
+            location:
+                location,
+
+            source:
+                source,
+
+            image:
+                image,
+
+            video:
+                video,
+
+            audio:
+                audio,
+
+            created_at:
+                new Date().toISOString()
+
+        };
+
+
+        result.news.unshift(
+            newsItem
+        );
+
+
+        status(
+            "⏳ جاري نشر الخبر على الموقع..."
+        );
+
+
+        await saveNews(
+            token,
+            result.news,
+            result.sha
+        );
+
+
+        status(
+            "✅ تم نشر الخبر بنجاح."
+        );
+
+
+        clearForm(false);
+
+
+    }catch(error){
+
+        status(
+            "❌ حدث خطأ:\n\n" +
+            error.message
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+    }
+
+}
+
+
+function clearForm(showMessage = true){
+
+    document.getElementById(
+        "title"
+    ).value = "";
+
+    document.getElementById(
+        "location"
+    ).value = "";
+
+    document.getElementById(
+        "source"
+    ).value = "";
+
+    document.getElementById(
+        "content"
+    ).value = "";
+
+    document.getElementById(
+        "imageFile"
+    ).value = "";
+
+    document.getElementById(
+        "videoFile"
+    ).value = "";
+
+    document.getElementById(
+        "audioFile"
+    ).value = "";
+
+    document.getElementById(
+        "imagePreview"
+    ).style.display = "none";
+
+
+    if(showMessage){
+
+        status(
+            "تم مسح الحقول."
+        );
+
+    }
+
+}
+
+</script>
+
+
+<!-- تسجيل دخول لوحة التحكم -->
+<div id="loginBox" style="
+position:fixed;
+inset:0;
+background:#111827;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
+font-family:Arial,Tahoma,sans-serif;
+direction:rtl;
+">
+
+<div style="
+background:white;
+width:90%;
+max-width:400px;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 40px #0005;
+">
+
+<h2 style="text-align:center;margin-top:0;">
+🔐 تسجيل الدخول
+</h2>
+
+<input
+id="loginUsername"
+type="text"
+placeholder="اسم المستخدم"
+autocomplete="username"
+style="
+width:100%;
+padding:14px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+">
+
+<input
+id="loginPassword"
+type="password"
+placeholder="كلمة السر"
+autocomplete="current-password"
+style="
+width:100%;
+padding:14px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+">
+
+<button
+onclick="loginAdmin()"
+style="
+width:100%;
+padding:14px;
+margin-top:12px;
+background:#b91c1c;
+color:white;
+border:0;
+border-radius:8px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+">
+دخول
+</button>
+
+<p
+id="loginError"
+style="
+color:#b91c1c;
+text-align:center;
+margin-bottom:0;
+display:none;
+">
+❌ اسم المستخدم أو كلمة السر غير صحيحة.
+</p>
+
+</div>
+</div>
+
+<script>
+
+function loginAdmin(){
+
+    const username =
+        document.getElementById("loginUsername").value;
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    if(
+        username === "Muhammad" &&
+        password === "muhammet4431"
+    ){
+
+        document.getElementById("loginBox").style.display =
+            "none";
+
+        sessionStorage.setItem(
+            "admin_logged_in",
+            "true"
+        );
+
+    }else{
+
+        document.getElementById("loginError").style.display =
+            "block";
+
+    }
+}
+
+if(
+    sessionStorage.getItem("admin_logged_in") === "true"
+){
+
+    document.getElementById("loginBox").style.display =
+        "none";
+
+}
+
+</script>
+</body>
+</html>
