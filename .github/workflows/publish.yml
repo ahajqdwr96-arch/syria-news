@@ -1,7 +1,33 @@
-name: Publish Syria News
+lname: نشر خبر جديد
 
 on:
   workflow_dispatch:
+    inputs:
+      title:
+        description: "عنوان الخبر"
+        required: true
+        type: string
+
+      category:
+        description: "تصنيف الخبر"
+        required: true
+        type: choice
+        options:
+          - عاجل
+          - سوريا
+          - حلب
+          - إدلب
+          - أخبار عامة
+
+      content:
+        description: "نص الخبر"
+        required: true
+        type: string
+
+      image:
+        description: "رابط صورة الخبر - اختياري"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -11,14 +37,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download repository
+      - name: تحميل الموقع
         uses: actions/checkout@v4
 
-      - name: Publish
+      - name: إنشاء الخبر
+        env:
+          TITLE: ${{ inputs.title }}
+          CATEGORY: ${{ inputs.category }}
+          CONTENT: ${{ inputs.content }}
+          IMAGE: ${{ inputs.image }}
         run: |
-          echo "Publishing Syria News..."
+          python3 - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+
+          path = "news.json"
+
+          if os.path.exists(path):
+              try:
+                  with open(path, "r", encoding="utf-8") as f:
+                      news = json.load(f)
+              except:
+                  news = []
+          else:
+              news = []
+
+          article = {
+              "title": os.environ["TITLE"],
+              "category": os.environ["CATEGORY"],
+              "content": os.environ["CONTENT"],
+              "image": os.environ["IMAGE"],
+              "date": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+          }
+
+          news.insert(0, article)
+
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(news, f, ensure_ascii=False, indent=2)
+          PY
+
+      - name: رفع الخبر
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet || git commit -m "Publish news"
+          git add news.json
+          git commit -m "نشر خبر جديد"
           git push
