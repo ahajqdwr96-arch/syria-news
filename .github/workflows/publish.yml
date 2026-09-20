@@ -1,4 +1,4 @@
-lname: نشر خبر جديد
+name: نشر خبر جديد
 
 on:
   workflow_dispatch:
@@ -25,7 +25,7 @@ on:
         type: string
 
       image:
-        description: "رابط صورة الخبر - اختياري"
+        description: "رابط صورة الخبر"
         required: false
         type: string
 
@@ -37,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: تحميل الموقع
         uses: actions/checkout@v4
 
@@ -46,6 +47,7 @@ jobs:
           CATEGORY: ${{ inputs.category }}
           CONTENT: ${{ inputs.content }}
           IMAGE: ${{ inputs.image }}
+
         run: |
           python3 - <<'PY'
           import json
@@ -64,10 +66,10 @@ jobs:
               news = []
 
           article = {
-              "title": os.environ["TITLE"],
-              "category": os.environ["CATEGORY"],
-              "content": os.environ["CONTENT"],
-              "image": os.environ["IMAGE"],
+              "title": os.environ.get("TITLE", ""),
+              "category": os.environ.get("CATEGORY", ""),
+              "content": os.environ.get("CONTENT", ""),
+              "image": os.environ.get("IMAGE", ""),
               "date": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
           }
 
@@ -75,12 +77,9 @@ jobs:
 
           with open(path, "w", encoding="utf-8") as f:
               json.dump(news, f, ensure_ascii=False, indent=2)
+
+          print("تم إنشاء الخبر بنجاح")
           PY
 
-      - name: رفع الخبر
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add news.json
-          git commit -m "نشر خبر جديد"
-          git push
+      - name: رفع الخبر إلى GitHub
+        run
