@@ -3,28 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>شبكة سوريا نيوز 🇸🇾</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
     background:#f3f4f6;
-    font-family:Arial,sans-serif;
-    color:#111;
+    font-family:Arial,Tahoma,sans-serif;
+    color:#111827;
 }
 
 header{
     background:#111827;
     color:white;
-    padding:20px;
+    padding:25px 15px;
     text-align:center;
 }
 
 header h1{
     margin:0;
-    font-size:25px;
+    font-size:30px;
 }
 
 header p{
@@ -34,14 +37,14 @@ header p{
 
 nav{
     background:#1f2937;
+    padding:12px;
     text-align:center;
-    padding:10px;
 }
 
 nav a{
     color:white;
     text-decoration:none;
-    margin:0 12px;
+    margin:0 10px;
 }
 
 .container{
@@ -50,78 +53,93 @@ nav a{
     padding:0 15px;
 }
 
-.breaking{
-    background:#b91c1c;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:20px;
-    font-weight:bold;
+.news-list{
+    display:grid;
+    gap:20px;
 }
 
-.card{
+.news-card{
     background:white;
-    border-radius:10px;
-    padding:18px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px #0001;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 2px 10px #0001;
 }
 
-.card h2{
-    margin-top:8px;
+.news-card img{
+    width:100%;
+    max-height:400px;
+    object-fit:cover;
+    display:block;
+}
+
+.news-body{
+    padding:20px;
 }
 
 .category{
     color:#b91c1c;
     font-weight:bold;
+    margin-bottom:8px;
 }
 
-.meta{
-    color:#666;
-    font-size:13px;
+.news-title{
+    font-size:23px;
+    line-height:1.5;
     margin:8px 0;
 }
 
-.card img{
-    width:100%;
-    max-height:500px;
-    object-fit:cover;
-    border-radius:9px;
-    margin-top:10px;
+.meta{
+    color:#6b7280;
+    font-size:14px;
+    margin:10px 0;
 }
 
-.card video{
-    width:100%;
-    border-radius:9px;
-    margin-top:10px;
-}
-
-.card audio{
-    width:100%;
-    margin-top:10px;
+.news-content{
+    font-size:17px;
+    line-height:1.9;
+    white-space:pre-wrap;
+    margin-top:12px;
 }
 
 .read-more{
     display:inline-block;
-    margin-top:12px;
-    background:#1683ff;
+    margin-top:18px;
+    background:#b91c1c;
     color:white;
     text-decoration:none;
-    padding:10px 15px;
-    border-radius:7px;
+    padding:11px 18px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.read-more:hover{
+    background:#991b1b;
+}
+
+video{
+    width:100%;
+    max-height:500px;
+    margin-top:15px;
+    border-radius:10px;
+}
+
+audio{
+    width:100%;
+    margin-top:15px;
 }
 
 .loading{
     text-align:center;
-    padding:25px;
-    color:#666;
+    padding:40px;
+    background:white;
+    border-radius:12px;
 }
 
 .error{
     background:#fee2e2;
     color:#991b1b;
-    padding:15px;
-    border-radius:8px;
+    padding:20px;
+    border-radius:10px;
 }
 
 footer{
@@ -141,53 +159,39 @@ footer a{
 <body>
 
 <header>
-<h1>🇸🇾 شبكة سوريا نيوز</h1>
-<p>صوت الحق والواقع</p>
+    <h1>🇸🇾 شبكة سوريا نيوز</h1>
+    <p>صوت الحق والواقع</p>
 </header>
 
 <nav>
-<a href="index.html">الرئيسية</a>
-<a href="news.html">الأخبار</a>
-<a href="https://t.me/suryainternetniuz" target="_blank">
-قناتنا على تيليجرام
-</a>
+    <a href="index.html">الرئيسية</a>
+
+    <a href="https://t.me/suryainternetniuz" target="_blank">
+        قناتنا على تيليجرام
+    </a>
 </nav>
 
 <div class="container">
 
-<div class="breaking">
-🔴 عاجل — شبكة سوريا نيوز
-</div>
-
-<div id="newsContainer">
-<div class="loading">
-⏳ جاري تحميل آخر الأخبار...
-</div>
-</div>
+    <div id="news">
+        <div class="loading">
+            ⏳ جاري تحميل الأخبار...
+        </div>
+    </div>
 
 </div>
 
 <footer>
-
-<p>شبكة سوريا نيوز 🇸🇾</p>
-
-<p>صوت الحق والواقع</p>
-
-<p>
-<a href="https://t.me/suryainternetniuz" target="_blank">
-قناة تيليجرام
-</a>
-</p>
-
+    <p>شبكة سوريا نيوز 🇸🇾</p>
+    <p>صوت الحق والواقع</p>
 </footer>
-
 
 <script>
 
 async function loadNews(){
 
     const container =
-        document.getElementById("newsContainer");
+        document.getElementById("news");
 
     try{
 
@@ -199,7 +203,7 @@ async function loadNews(){
         if(!response.ok){
 
             throw new Error(
-                "news.json غير موجود"
+                "تعذر تحميل الأخبار."
             );
 
         }
@@ -207,79 +211,22 @@ async function loadNews(){
         const news =
             await response.json();
 
-        container.innerHTML = "";
-
         if(!Array.isArray(news) || news.length === 0){
 
             container.innerHTML = `
-                <div class="card">
-                    <h2>📰 آخر الأخبار</h2>
-                    <p>لا توجد أخبار منشورة حالياً.</p>
+                <div class="loading">
+                    لا توجد أخبار منشورة حالياً.
                 </div>
             `;
 
             return;
         }
 
+        let html = `
+            <div class="news-list">
+        `;
 
-        news.slice(0,10).forEach(item => {
-
-            const card =
-                document.createElement("div");
-
-            card.className = "card";
-
-
-            let imageHTML = "";
-
-            if(item.image){
-
-                imageHTML = `
-                    <img
-                        src="${item.image}"
-                        alt="صورة الخبر"
-                    >
-                `;
-
-            }
-
-
-            let videoHTML = "";
-
-            if(item.video){
-
-                videoHTML = `
-                    <video
-                        controls
-                        preload="metadata"
-                    >
-                        <source
-                            src="${item.video}"
-                        >
-                        متصفحك لا يدعم تشغيل الفيديو.
-                    </video>
-                `;
-
-            }
-
-
-            let audioHTML = "";
-
-            if(item.audio){
-
-                audioHTML = `
-                    <audio
-                        controls
-                    >
-                        <source
-                            src="${item.audio}"
-                        >
-                        متصفحك لا يدعم تشغيل الصوت.
-                    </audio>
-                `;
-
-            }
-
+        news.slice(0, 20).forEach(item => {
 
             let date = "";
 
@@ -291,64 +238,126 @@ async function loadNews(){
                     ).toLocaleString(
                         "ar-SY"
                     );
-
             }
 
+            let imageHTML = "";
 
-            card.innerHTML = `
+            if(item.image){
 
-                <div class="category">
-                    ${item.category || "سوريا"}
-                </div>
+                imageHTML = `
+                    <img
+                        src="${item.image}"
+                        alt="صورة الخبر"
+                    >
+                `;
+            }
 
-                <h2>
-                    ${item.title || ""}
-                </h2>
+            let videoHTML = "";
 
-                <div class="meta">
-                    ${item.location ? "📍 " + item.location : ""}
-                    ${item.source ? " | ✍️ " + item.source : ""}
-                    ${date ? " | 🕐 " + date : ""}
-                </div>
+            if(item.video){
 
-                ${imageHTML}
+                videoHTML = `
+                    <video controls>
+                        <source src="${item.video}">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                `;
+            }
 
-                <p>
-                    ${item.content || ""}
-                </p>
+            let audioHTML = "";
 
-                ${videoHTML}
+            if(item.audio){
 
-                ${audioHTML}
+                audioHTML = `
+                    <audio controls>
+                        <source src="${item.audio}">
+                        متصفحك لا يدعم تشغيل الصوت.
+                    </audio>
+                `;
+            }
+
+            html += `
+
+                <article class="news-card">
+
+                    ${imageHTML}
+
+                    <div class="news-body">
+
+                        <div class="category">
+                            ${item.category || "سوريا"}
+                        </div>
+
+                        <h2 class="news-title">
+                            ${item.title || ""}
+                        </h2>
+
+                        <div class="meta">
+
+                            ${
+                                item.location
+                                ? "📍 " + item.location
+                                : ""
+                            }
+
+                            ${
+                                item.source
+                                ? " | ✍️ " + item.source
+                                : ""
+                            }
+
+                            ${
+                                date
+                                ? " | 🕐 " + date
+                                : ""
+                            }
+
+                        </div>
+
+                        <div class="news-content">
+                            ${
+                                item.content || ""
+                            }
+                        </div>
+
+                        ${videoHTML}
+
+                        ${audioHTML}
+
+                        <a
+                            class="read-more"
+                            href="article.html?id=${encodeURIComponent(item.id)}"
+                        >
+                            📰 قراءة الخبر كاملة
+                        </a>
+
+                    </div>
+
+                </article>
 
             `;
 
-
-            container.appendChild(card);
-
         });
 
+        html += `
+            </div>
+        `;
+
+        container.innerHTML = html;
 
     }catch(error){
 
         container.innerHTML = `
-
             <div class="error">
-
-                ❌ تعذر تحميل الأخبار.
-
+                ❌ حدث خطأ أثناء تحميل الأخبار.
                 <br><br>
-
                 ${error.message}
-
             </div>
-
         `;
 
     }
 
 }
-
 
 loadNews();
 
