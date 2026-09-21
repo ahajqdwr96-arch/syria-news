@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://bgypexbbkcrqdcytwnww.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Ybdh7eQMoOEOAdtLxltLRw_oRKUOHx-";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>لوحة نشر الأخبار - شبكة سوريا نيوز</title>
 
+</script>
 <style>
 *{
     box-sizing:border-box;
@@ -116,6 +123,7 @@ button:disabled{
 </head>
 
 <body>
+<script>window.addEventListener("load", function(){ setTimeout(loadAdminStats, 1000); });</script>
 
 <div class="container">
 
@@ -231,6 +239,29 @@ button:disabled{
     class="status"
 >
 جاهز للنشر.
+</div>
+
+
+<div id="statsPanel" style="margin-top:25px;padding:20px;background:#fff;border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,.08);">
+<h2>📊 إحصائيات الموقع</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+<div style="flex:1;min-width:140px;padding:15px;background:#f3f6fa;border-radius:14px;text-align:center;">👁️ الزيارات<br><strong id="adminVisitCount" style="font-size:28px;">0</strong></div>
+<div style="flex:1;min-width:140px;padding:15px;background:#f3f6fa;border-radius:14px;text-align:center;">❤️ الإعجابات<br><strong id="adminLikeCount" style="font-size:28px;">0</strong></div>
+</div>
+<button type="button" onclick="loadAdminStats()" style="margin-top:12px;padding:10px 18px;border:0;border-radius:10px;cursor:pointer;">🔄 تحديث الإحصائيات</button>
+</div>
+<div id="newsManager" style="margin-top:25px;">
+    <h2>📰 إدارة الأخبار</h2>
+    <div id="newsManagerList">
+        <p>اضغط تحديث الأخبار لعرض الأخبار المنشورة.</p>
+    </div>
+    <button
+        type="button"
+        onclick="loadNewsManager()"
+        style="margin-top:10px;"
+    >
+        🔄 تحديث الأخبار
+    </button>
 </div>
 
 <div class="note">
@@ -852,6 +883,16 @@ display:none;
 </div>
 
 <script>
+async function loadAdminStats(){
+    try {
+        const { data, error } = await supabaseClient.from("site_stats").select("total_visits,total_likes").eq("id",1).single();
+        if(error) throw error;
+        document.getElementById("adminVisitCount").textContent = data.total_visits;
+        document.getElementById("adminLikeCount").textContent = data.total_likes;
+    } catch(error) {
+        console.error("Stats error:", error); alert("Stats Error: " + error.message);
+    }
+}
 
 function loginAdmin(){
 
@@ -890,6 +931,227 @@ if(
         "none";
 
 }
+
+
+    
+async function loadNewsManager(){
+
+    const token =
+        document.getElementById("token").value.trim();
+
+    const box =
+        document.getElementById("newsManagerList");
+
+    if(!token){
+        box.innerHTML =
+            "<p>❌ ضع GitHub Token أولاً.</p>";
+        return;
+    }
+
+    box.innerHTML =
+        "<p>⏳ جاري تحميل الأخبار...</p>";
+
+    try{
+
+        const result =
+            await getNews(token);
+
+        if(!result.news.length){
+
+            box.innerHTML =
+                "<p>لا توجد أخبار منشورة.</p>";
+
+            return;
+        }
+
+        box.innerHTML = "";
+
+        result.news.forEach(item => {
+
+            const card =
+                document.createElement("div");
+
+            card.style.cssText =
+                "background:#fff;border:1px solid #ddd;border-radius:10px;padding:15px;margin-top:12px;";
+
+            card.innerHTML = `
+                <h3>${item.title || "بدون عنوان"}</h3>
+
+                <p>
+                    ${item.content || ""}
+                </p>
+
+                <small>
+                    ${item.location || ""}
+                    ${item.category ? " — " + item.category : ""}
+                </small>
+
+                <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+
+                    <button
+                        type="button"
+                        onclick="editNews('${item.id}')"
+                    >
+                        ✏️ تعديل
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="deleteNews('${item.id}')"
+                        style="background:#b91c1c;color:white;"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </div>
+            `;
+
+            box.appendChild(card);
+
+        });
+
+    }catch(error){
+
+        box.innerHTML =
+            "<p>❌ تعذر تحميل الأخبار.</p><pre>" +
+            error.message +
+            "</pre>";
+
+    }
+}
+
+
+async function deleteNews(id){
+
+    if(!confirm("هل أنت متأكد من حذف هذا الخبر؟")){
+        return;
+    }
+
+    const token =
+        document.getElementById("token").value.trim();
+
+    if(!token){
+        status("❌ ضع GitHub Token أولاً.");
+        return;
+    }
+
+    try{
+
+        status("⏳ جاري حذف الخبر...");
+
+        const result =
+            await getNews(token);
+
+        const news =
+            result.news.filter(
+                item => String(item.id) !== String(id)
+            );
+
+        await saveNews(
+            token,
+            news,
+            result.sha
+        );
+
+        status("✅ تم حذف الخبر بنجاح.");
+
+        loadNewsManager();
+
+    }catch(error){
+
+        status(
+            "❌ فشل حذف الخبر:\n\n" +
+            error.message
+        );
+
+    }
+}
+
+
+async function editNews(id){
+
+    const token =
+        document.getElementById("token").value.trim();
+
+    if(!token){
+        status("❌ ضع GitHub Token أولاً.");
+        return;
+    }
+
+    try{
+
+        const result =
+            await getNews(token);
+
+        const item =
+            result.news.find(
+                news => String(news.id) === String(id)
+            );
+
+        if(!item){
+            status("❌ لم يتم العثور على الخبر.");
+            return;
+        }
+
+        const newTitle =
+            prompt(
+                "عنوان الخبر:",
+                item.title || ""
+            );
+
+        if(newTitle === null){
+            return;
+        }
+
+        const newContent =
+            prompt(
+                "نص الخبر:",
+                item.content || ""
+            );
+
+        if(newContent === null){
+            return;
+        }
+
+        const newLocation =
+            prompt(
+                "الموقع:",
+                item.location || ""
+            );
+
+        if(newLocation === null){
+            return;
+        }
+
+        item.title =
+            newTitle.trim();
+
+        item.content =
+            newContent.trim();
+
+        item.location =
+            newLocation.trim();
+
+        await saveNews(
+            token,
+            result.news,
+            result.sha
+        );
+
+        status("✅ تم تعديل الخبر بنجاح.");
+
+        loadNewsManager();
+
+    }catch(error){
+
+        status(
+            "❌ فشل تعديل الخبر:\n\n" +
+            error.message
+        );
+
+    }
+}
+
 
 </script>
 </body>
