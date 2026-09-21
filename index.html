@@ -1,367 +1,1399 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>شبكة سوريا نيوز 🇸🇾</title>
+<title>شبكة سوريا نيوز</title>
+
+<meta name="description" content="شبكة سوريا نيوز - آخر الأخبار والتطورات السورية.">
 
 <style>
+
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
-body{
-    margin:0;
-    background:#f3f4f6;
-    font-family:Arial,Tahoma,sans-serif;
-    color:#111827;
+html{
+    scroll-behavior:smooth;
 }
+
+:root{
+    --green:#087443;
+    --green-dark:#055b36;
+    --dark:#101827;
+    --text:#111827;
+    --muted:#64748b;
+    --light:#f4f6f8;
+    --white:#ffffff;
+    --border:#e5e7eb;
+    --red:#ce1126;
+}
+
+body{
+    font-family:
+        Tahoma,
+        Arial,
+        "Noto Sans Arabic",
+        sans-serif;
+
+    background:var(--light);
+    color:var(--text);
+
+    line-height:1.8;
+
+    overflow-x:hidden;
+
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+}
+
+/* ================= HEADER ================= */
 
 header{
-    background:#111827;
-    color:white;
-    padding:25px 15px;
-    text-align:center;
+    background:rgba(255,255,255,.97);
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 }
 
-header h1{
-    margin:0;
-    font-size:30px;
+.header-top{
+    max-width:1250px;
+    min-height:82px;
+
+    margin:auto;
+    padding:12px 20px;
+
+    display:flex;
+    align-items:center;
 }
 
-header p{
-    margin:8px 0 0;
-    color:#d1d5db;
-}
+.logo{
+    display:flex;
+    align-items:center;
 
-nav{
-    background:#1f2937;
-    padding:12px;
-    text-align:center;
-}
+    gap:14px;
 
-nav a{
-    color:white;
     text-decoration:none;
-    margin:0 10px;
+    color:var(--text);
 }
+
+.logo-flag{
+    width:62px;
+    height:41px;
+
+    overflow:hidden;
+
+    border-radius:5px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.14);
+
+    flex-shrink:0;
+}
+
+.logo-flag svg{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.logo-text{
+    line-height:1.3;
+}
+
+.logo-title{
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:-.5px;
+}
+
+.logo-sub{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* ================= NAV ================= */
+
+.navbar{
+    border-top:1px solid #f1f3f5;
+}
+
+.nav-inner{
+    max-width:1250px;
+
+    margin:auto;
+    padding:0 20px;
+}
+
+.nav-btn{
+    position:relative;
+
+    border:0;
+    background:none;
+
+    padding:11px 22px;
+
+    font-family:inherit;
+    font-size:14px;
+    font-weight:900;
+
+    color:var(--green);
+
+    cursor:pointer;
+}
+
+.nav-btn::after{
+    content:"";
+
+    position:absolute;
+
+    right:18px;
+    left:18px;
+    bottom:0;
+
+    height:3px;
+
+    background:var(--green);
+
+    border-radius:5px 5px 0 0;
+}
+
+/* ================= BREAKING ================= */
+
+.breaking{
+    background:var(--dark);
+    color:white;
+}
+
+.breaking-inner{
+    max-width:1250px;
+
+    min-height:43px;
+
+    margin:auto;
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+}
+
+.breaking-label{
+    background:var(--red);
+
+    padding:3px 12px;
+
+    border-radius:4px;
+
+    font-size:11px;
+    font-weight:900;
+
+    flex-shrink:0;
+}
+
+.breaking-text{
+    min-width:0;
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* ================= MAIN ================= */
 
 .container{
-    max-width:1000px;
-    margin:25px auto;
-    padding:0 15px;
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:28px 20px 70px;
 }
 
-.news-list{
+/* ================= TITLES ================= */
+
+.section-title{
+    display:flex;
+    align-items:center;
+
+    margin:25px 0 17px;
+}
+
+.section-title h2{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    font-size:22px;
+    font-weight:900;
+}
+
+.section-title h2::before{
+    content:"";
+
+    width:5px;
+    height:27px;
+
+    background:var(--green);
+
+    border-radius:5px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
     display:grid;
+
+    grid-template-columns:
+        minmax(0,1.65fr)
+        minmax(300px,1fr);
+
+    gap:20px;
+
+    margin-bottom:38px;
+}
+
+.hero-main{
+    position:relative;
+
+    min-height:430px;
+
+    overflow:hidden;
+
+    border-radius:17px;
+
+    background:#17202b;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.10);
+
+    transform:translateZ(0);
+}
+
+.hero-main > img{
+    width:100%;
+    height:430px;
+
+    object-fit:cover;
+
+    display:block;
+
+    transform:translateZ(0);
+}
+
+.hero-placeholder{
+    width:100%;
+    height:430px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087443,
+            #101827
+        );
+}
+
+.hero-overlay{
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+    align-items:flex-end;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.91),
+            rgba(0,0,0,.40) 48%,
+            transparent 78%
+        );
+}
+
+.hero-content{
+    width:100%;
+
+    color:white;
+}
+
+.category{
+    display:inline-block;
+
+    background:var(--green);
+
+    color:white;
+
+    padding:3px 11px;
+
+    border-radius:5px;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+.hero-title{
+    margin:9px 0;
+
+    font-size:29px;
+    line-height:1.5;
+
+    font-weight:900;
+}
+
+.hero-meta{
+    color:#dbe4e9;
+
+    font-size:12px;
+}
+
+/* ================= SIDE NEWS ================= */
+
+.hero-side{
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+}
+
+.side-card{
+    display:flex;
+
+    height:126px;
+
+    overflow:hidden;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease;
+
+    will-change:transform;
+
+    transform:translateZ(0);
+}
+
+.side-card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(15,23,42,.09);
+}
+
+.side-image{
+    width:145px;
+
+    flex-shrink:0;
+
+    background:#e8edf0;
+
+    overflow:hidden;
+}
+
+.side-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+.side-content{
+    min-width:0;
+
+    padding:12px;
+}
+
+.side-content h3{
+    margin:5px 0;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    font-weight:900;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+}
+
+.side-date{
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+/* ================= NEWS GRID ================= */
+
+.news-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
     gap:20px;
 }
 
 .news-card{
     background:white;
+
+    border:1px solid var(--border);
+
     border-radius:14px;
+
     overflow:hidden;
-    box-shadow:0 2px 10px #0001;
+
+    transform:translateZ(0);
+
+    backface-visibility:hidden;
+
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease;
+
+    will-change:transform;
+
+    animation:
+        newsAppear .55s ease both;
 }
 
-.news-card img{
-    width:100%;
-    max-height:400px;
-    object-fit:cover;
-    display:block;
+.news-card:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 14px 30px rgba(15,23,42,.10);
 }
+
+/* ظهور سلس */
+
+@keyframes newsAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(14px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* تأخير بسيط لكل بطاقة */
+
+.news-card:nth-child(2){
+    animation-delay:.04s;
+}
+
+.news-card:nth-child(3){
+    animation-delay:.08s;
+}
+
+.news-card:nth-child(4){
+    animation-delay:.12s;
+}
+
+.news-card:nth-child(5){
+    animation-delay:.16s;
+}
+
+.news-card:nth-child(6){
+    animation-delay:.20s;
+}
+
+.news-card:nth-child(7){
+    animation-delay:.24s;
+}
+
+.news-card:nth-child(8){
+    animation-delay:.28s;
+}
+
+.news-card:nth-child(9){
+    animation-delay:.32s;
+}
+
+/* ================= NEWS IMAGE ================= */
+
+.news-image{
+    height:205px;
+
+    background:#e9edf0;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.news-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transform:translateZ(0);
+
+    transition:
+        transform .45s cubic-bezier(.2,.7,.2,1);
+}
+
+.news-card:hover .news-image img{
+    transform:scale(1.035);
+}
+
+/* ================= NEWS BODY ================= */
 
 .news-body{
-    padding:20px;
-}
-
-.category{
-    color:#b91c1c;
-    font-weight:bold;
-    margin-bottom:8px;
+    padding:16px;
 }
 
 .news-title{
-    font-size:23px;
-    line-height:1.5;
     margin:8px 0;
+
+    font-size:18px;
+
+    line-height:1.6;
+
+    font-weight:900;
+}
+
+.news-excerpt{
+    min-height:70px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
 }
 
 .meta{
-    color:#6b7280;
-    font-size:14px;
-    margin:10px 0;
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin-top:12px;
+
+    color:#8793a1;
+
+    font-size:10px;
 }
 
-.news-content{
-    font-size:17px;
-    line-height:1.9;
-    white-space:pre-wrap;
-    margin-top:12px;
-}
+/* ================= READ MORE ================= */
 
 .read-more{
-    display:inline-block;
-    margin-top:18px;
-    background:#b91c1c;
+    display:block;
+
+    margin-top:14px;
+
+    padding:9px;
+
+    border-radius:7px;
+
+    background:var(--green);
+
     color:white;
+
+    text-align:center;
+
     text-decoration:none;
-    padding:11px 18px;
-    border-radius:8px;
-    font-weight:bold;
+
+    font-size:12px;
+    font-weight:900;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
 }
 
 .read-more:hover{
-    background:#991b1b;
+    background:var(--green-dark);
+
+    transform:translateY(-1px);
 }
 
-video{
-    width:100%;
-    max-height:500px;
-    margin-top:15px;
-    border-radius:10px;
+/* ================= ACTIONS ================= */
+
+.actions{
+    display:flex;
+
+    gap:6px;
+
+    margin-top:10px;
 }
 
-audio{
-    width:100%;
-    margin-top:15px;
-}
+.action-btn{
+    flex:1;
 
-.loading{
-    text-align:center;
-    padding:40px;
+    min-height:35px;
+
+    border:1px solid var(--border);
+
     background:white;
-    border-radius:12px;
+
+    border-radius:7px;
+
+    padding:6px 4px;
+
+    font-family:inherit;
+
+    font-size:11px;
+
+    color:#475569;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
 }
 
-.error{
-    background:#fee2e2;
-    color:#991b1b;
-    padding:20px;
-    border-radius:10px;
+.action-btn:hover{
+    background:#e9f6ef;
+
+    color:var(--green);
+
+    border-color:#b9dfca;
 }
+
+/* ================= EMPTY ================= */
+
+.empty{
+    grid-column:1/-1;
+
+    padding:60px 20px;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    text-align:center;
+
+    color:var(--muted);
+}
+
+/* ================= FOOTER ================= */
 
 footer{
-    margin-top:40px;
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:25px;
+    margin-top:30px;
+
+    background:var(--dark);
+
+    color:#cbd5e1;
 }
 
-footer a{
-    color:#60a5fa;
+.footer-inner{
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:38px 20px;
 }
+
+.footer-logo{
+    margin-bottom:10px;
+
+    color:white;
+
+    font-size:21px;
+    font-weight:900;
+}
+
+.footer-text{
+    max-width:650px;
+
+    color:#94a3b8;
+
+    font-size:12px;
+
+    line-height:2;
+}
+
+.copyright{
+    padding:14px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    color:#64748b;
+
+    text-align:center;
+
+    font-size:10px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .news-grid{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header-top{
+        min-height:70px;
+
+        padding:10px 14px;
+    }
+
+    .logo-flag{
+        width:52px;
+        height:35px;
+    }
+
+    .logo-title{
+        font-size:19px;
+    }
+
+    .logo-sub{
+        font-size:9px;
+    }
+
+    .nav-inner{
+        padding:0 14px;
+    }
+
+    .nav-btn{
+        padding:10px 16px;
+    }
+
+    .breaking-inner{
+        padding:0 13px;
+    }
+
+    .container{
+        padding:
+            18px
+            13px
+            50px;
+    }
+
+    .hero-main{
+        min-height:330px;
+    }
+
+    .hero-main > img{
+        height:330px;
+    }
+
+    .hero-placeholder{
+        height:330px;
+    }
+
+    .hero-overlay{
+        padding:20px;
+    }
+
+    .hero-title{
+        font-size:21px;
+    }
+
+    .side-card{
+        height:105px;
+    }
+
+    .side-image{
+        width:120px;
+    }
+
+    .news-grid{
+        grid-template-columns:1fr;
+
+        gap:15px;
+    }
+
+    .news-image{
+        height:210px;
+    }
+
+}
+
+/* ================= REDUCED MOTION ================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+
+<!-- ================= HEADER ================= -->
+
 <header>
-    <h1>🇸🇾 شبكة سوريا نيوز</h1>
-    <p>صوت الحق والواقع</p>
+
+    <div class="header-top">
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-flag">
+
+                <svg
+                    viewBox="0 0 90 60"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+
+                    <!-- أخضر -->
+                    <rect
+                        x="0"
+                        y="0"
+                        width="90"
+                        height="20"
+                        fill="#007A3D"
+                    />
+
+                    <!-- أبيض -->
+                    <rect
+                        x="0"
+                        y="20"
+                        width="90"
+                        height="20"
+                        fill="#FFFFFF"
+                    />
+
+                    <!-- أسود -->
+                    <rect
+                        x="0"
+                        y="40"
+                        width="90"
+                        height="20"
+                        fill="#000000"
+                    />
+
+                    <!-- النجمة الأولى -->
+                    <polygon
+                        points="
+                        30,25
+                        31.8,29
+                        36.2,29.2
+                        32.8,31.8
+                        34,36
+                        30,33.5
+                        26,36
+                        27.2,31.8
+                        23.8,29.2
+                        28.2,29
+                        "
+                        fill="#CE1126"
+                    />
+
+                    <!-- النجمة الثانية -->
+                    <polygon
+                        points="
+                        45,25
+                        46.8,29
+                        51.2,29.2
+                        47.8,31.8
+                        49,36
+                        45,33.5
+                        41,36
+                        42.2,31.8
+                        38.8,29.2
+                        43.2,29
+                        "
+                        fill="#CE1126"
+                    />
+
+                    <!-- النجمة الثالثة -->
+                    <polygon
+                        points="
+                        60,25
+                        61.8,29
+                        66.2,29.2
+                        62.8,31.8
+                        64,36
+                        60,33.5
+                        56,36
+                        57.2,31.8
+                        53.8,29.2
+                        58.2,29
+                        "
+                        fill="#CE1126"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <div class="logo-text">
+
+                <div class="logo-title">
+                    شبكة سوريا نيوز
+                </div>
+
+                <div class="logo-sub">
+                    تغطية إخبارية سورية مستمرة
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+
+    <!-- أخبار فقط -->
+
+    <nav class="navbar">
+
+        <div class="nav-inner">
+
+            <button class="nav-btn">
+                أخبار
+            </button>
+
+        </div>
+
+    </nav>
+
 </header>
 
-<nav>
-    <a href="index.html">الرئيسية</a>
 
-    <a href="https://t.me/suryainternetniuz" target="_blank">
-        قناتنا على تيليجرام
-    </a>
-</nav>
+<!-- ================= BREAKING ================= -->
 
-<div class="container">
+<div class="breaking">
 
-    <div id="news">
-        <div class="loading">
-            ⏳ جاري تحميل الأخبار...
+    <div class="breaking-inner">
+
+        <span class="breaking-label">
+            عاجل
+        </span>
+
+        <div
+            id="breakingText"
+            class="breaking-text"
+        >
+            جاري تحميل آخر الأخبار...
         </div>
+
     </div>
 
 </div>
 
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <section id="heroSection">
+
+        <div class="empty">
+            جاري تحميل الأخبار...
+        </div>
+
+    </section>
+
+
+    <div class="section-title">
+
+        <h2>
+            آخر الأخبار
+        </h2>
+
+    </div>
+
+
+    <section
+        id="newsContainer"
+        class="news-grid"
+    >
+
+        <div class="empty">
+            جاري تحميل الأخبار...
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
-    <p>شبكة سوريا نيوز 🇸🇾</p>
-    <p>صوت الحق والواقع</p>
+
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            شبكة سوريا نيوز
+        </div>
+
+        <div class="footer-text">
+            شبكة إخبارية سورية تهتم بنقل آخر التطورات والأخبار
+            من مختلف المناطق السورية، مع متابعة مستمرة للأحداث
+            المحلية والدولية.
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+        © 2026 شبكة سوريا نيوز — جميع الحقوق محفوظة.
+    </div>
+
 </footer>
+
 
 <script>
 
-async function loadNews(){
+/* ================= DATA ================= */
 
-    const container =
-        document.getElementById("news");
+let allNews = [];
+
+
+/* ================= LOAD ================= */
+
+async function loadNews(){
 
     try{
 
         const response =
             await fetch(
-                "news.json?time=" + Date.now()
+                "news.json?time=" +
+                Date.now()
             );
 
         if(!response.ok){
 
             throw new Error(
-                "تعذر تحميل الأخبار."
+                "news.json error"
             );
 
         }
 
-        const news =
+        allNews =
             await response.json();
 
-        if(!Array.isArray(news) || news.length === 0){
+        if(!Array.isArray(allNews)){
 
-            container.innerHTML = `
-                <div class="loading">
-                    لا توجد أخبار منشورة حالياً.
-                </div>
-            `;
+            allNews = [];
 
-            return;
         }
 
-        let html = `
-            <div class="news-list">
-        `;
+        updateBreaking();
 
-        news.slice(0, 20).forEach(item => {
+        displayHero();
 
-            let date = "";
-
-            if(item.created_at){
-
-                date =
-                    new Date(
-                        item.created_at
-                    ).toLocaleString(
-                        "ar-SY"
-                    );
-            }
-
-            let imageHTML = "";
-
-            if(item.image){
-
-                imageHTML = `
-                    <img
-                        src="${item.image}"
-                        alt="صورة الخبر"
-                    >
-                `;
-            }
-
-            let videoHTML = "";
-
-            if(item.video){
-
-                videoHTML = `
-                    <video controls>
-                        <source src="${item.video}">
-                        متصفحك لا يدعم تشغيل الفيديو.
-                    </video>
-                `;
-            }
-
-            let audioHTML = "";
-
-            if(item.audio){
-
-                audioHTML = `
-                    <audio controls>
-                        <source src="${item.audio}">
-                        متصفحك لا يدعم تشغيل الصوت.
-                    </audio>
-                `;
-            }
-
-            html += `
-
-                <article class="news-card">
-
-                    ${imageHTML}
-
-                    <div class="news-body">
-
-                        <div class="category">
-                            ${item.category || "سوريا"}
-                        </div>
-
-                        <h2 class="news-title">
-                            ${item.title || ""}
-                        </h2>
-
-                        <div class="meta">
-
-                            ${
-                                item.location
-                                ? "📍 " + item.location
-                                : ""
-                            }
-
-                            ${
-                                item.source
-                                ? " | ✍️ " + item.source
-                                : ""
-                            }
-
-                            ${
-                                date
-                                ? " | 🕐 " + date
-                                : ""
-                            }
-
-                        </div>
-
-                        <div class="news-content">
-                            ${
-                                item.content || ""
-                            }
-                        </div>
-
-                        ${videoHTML}
-
-                        ${audioHTML}
-
-                        <a
-                            class="read-more"
-                            href="article.html?id=${encodeURIComponent(item.id)}"
-                        >
-                            📰 قراءة الخبر كاملة
-                        </a>
-
-                    </div>
-
-                </article>
-
-            `;
-
-        });
-
-        html += `
-            </div>
-        `;
-
-        container.innerHTML = html;
+        displayNews(allNews);
 
     }catch(error){
 
-        container.innerHTML = `
-            <div class="error">
-                ❌ حدث خطأ أثناء تحميل الأخبار.
-                <br><br>
-                ${error.message}
-            </div>
-        `;
+        console.error(error);
+
+        document
+            .getElementById(
+                "heroSection"
+            )
+            .innerHTML = `
+
+                <div class="empty">
+
+                    ⚠️
+
+                    <br><br>
+
+                    تعذر تحميل الأخبار.
+
+                </div>
+            `;
+
+        document
+            .getElementById(
+                "newsContainer"
+            )
+            .innerHTML = "";
 
     }
 
 }
 
-loadNews();
 
-</script>
+/* ================= DATE ================= */
 
-</body>
-</html>
+function formatDate(date){
+
+    if(!date){
+
+        return "";
+
+    }
+
+    const d =
+        new Date(date);
+
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+
+        return "";
+
+    }
+
+    return d.toLocaleDateString(
+        "ar-SY",
+        {
+            year:"numeric",
+            month:"long",
+            day:"numeric"
+        }
+    );
+
+}
+
+
+/* ================= CLEAN TEXT ================= */
+
+function cleanText(text){
+
+    if(!text){
+
+        return "";
+
+    }
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.innerHTML = text;
+
+    return (
+        div.textContent ||
+        div.innerText ||
+        ""
+    );
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+function escapeJS(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    )
+    .replace(
+        /"/g,
+        '\\"'
+    )
+    .replace(
+        /\n/g,
+        "\\n"
+    )
+    .replace(
+        /\r/g,
+        "\\r"
+    );
+
+}
+
+
+/* ================= IMAGE ================= */
+
+function imageHTML(item){
+
+    if(!item.image){
+
+        return "";
+
+    }
+
+    return `
+
+        <img
+            src="${escapeHTML(item.image)}"
+            alt="${escapeHTML(
+                item.title ||
+                "خبر"
+            )}"
+            loading="lazy"
+            decoding="async"
+            onerror="
+                this.style.display='none'
+            "
+        >
+
+    `;
+
+}
+
+
+/* ================= HERO ================= */
+
+function displayHero(){
+
+    const section =
+        document.getElementById(
+            "heroSection"
+        );
+
+    if(!allNews.length){
+
+        section.innerHTML = `
+
+            <div class="empty">
+
+                📰
+
+                <br><br>
+
+                لا توجد أخبار حتى الآن.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const main =
+        allNews[0];
+
+    const side =
+        allNews.slice(1,4);
+
+
+    section.innerHTML = `
+
+        <div class="section-title">
+
+            <h2>
+                الخبر الرئيسي
+            </h2>
+
+        </div>
+
+
+        <div class="hero">
+
+
+            <article class="hero-main">
+
+                ${
+                    main.image
+
+                    ? imageHTML(main)
+
+                    : `
+                        <div
+                            class="hero-placeholder"
+                        ></div>
+                    `
+                }
+
+
+                <div class="hero-overlay">
+
+                    <div class="hero-content">
+
+
+                                           
