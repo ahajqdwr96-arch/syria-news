@@ -49,9 +49,11 @@ footer a{color:#60a5fa}
 </p>
 </div>
 
+<div id="newsContainer">
 <div class="card">
 <h2>📰 آخر الأخبار</h2>
-<p>سيتم إضافة الأخبار هنا تباعاً.</p>
+<p>جاري تحميل الأخبار...</p>
+</div>
 </div>
 
 </div>
@@ -68,3 +70,111 @@ footer a{color:#60a5fa}
 
 </body>
 </html>
+
+<script>
+async function loadNews(){
+
+    const container = document.getElementById("newsContainer");
+
+    try {
+        const response = await fetch("news.json?time=" + Date.now());
+
+        if(!response.ok){
+            throw new Error("news.json غير موجود");
+        }
+
+        const news = await response.json();
+
+        container.innerHTML = "";
+
+        if(!Array.isArray(news) || news.length === 0){
+            container.innerHTML = `
+                <div class="card">
+                    <h2>📰 آخر الأخبار</h2>
+                    <p>لا توجد أخبار منشورة حالياً.</p>
+                </div>
+            `;
+            return;
+        }
+
+        news.slice(0,10).forEach(item => {
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            let imageHTML = "";
+
+            if(item.image){
+                imageHTML = `
+                    <img
+                        src="${item.image}"
+                        alt="صورة الخبر"
+                        style="max-width:100%;border-radius:10px;"
+                    >
+                `;
+            }
+
+            let videoHTML = "";
+
+            if(item.video){
+                videoHTML = `
+                    <video
+                        controls
+                        preload="metadata"
+                        style="max-width:100%;width:100%;border-radius:10px;"
+                    >
+                        <source src="${item.video}">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                `;
+            }
+
+            let audioHTML = "";
+
+            if(item.audio){
+                audioHTML = `
+                    <audio controls style="width:100%;">
+                        <source src="${item.audio}">
+                    </audio>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="category">
+                    ${item.category || "سوريا"}
+                </div>
+
+                <h2>${item.title || ""}</h2>
+
+                ${imageHTML}
+
+                <p>${item.content || ""}</p>
+
+                <p>${item.location ? "📍 " + item.location : ""}</p>
+
+                <p>${item.source ? "📰 " + item.source : ""}</p>
+
+                ${videoHTML}
+
+                ${audioHTML}
+            `;
+
+            container.appendChild(card);
+        });
+
+    } catch(error) {
+
+        container.innerHTML = `
+            <div class="card">
+                <h2>📰 آخر الأخبار</h2>
+                <p>تعذر تحميل الأخبار حالياً.</p>
+            </div>
+        `;
+
+        console.error(error);
+    }
+}
+
+loadNews();
+</script>
+
