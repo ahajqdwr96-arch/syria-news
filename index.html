@@ -1,127 +1,422 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>شبكة سوريا نيوز 🇸🇾</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f3f4f6;font-family:Arial,sans-serif;color:#111}
-header{background:#111827;color:white;padding:20px;text-align:center}
-header h1{margin:0;font-size:25px}
-header p{margin:8px 0 0;color:#d1d5db}
-nav{background:#1f2937;text-align:center;padding:10px}
-nav a{color:white;text-decoration:none;margin:0 12px}
-.container{max-width:1000px;margin:25px auto;padding:0 15px}
-.breaking{background:#b91c1c;color:white;padding:12px;border-radius:8px;margin-bottom:20px;font-weight:bold}
-.card{background:white;border-radius:10px;padding:18px;margin-bottom:15px;box-shadow:0 2px 8px #0001}
-.card h2{margin-top:0}
-.category{color:#b91c1c;font-weight:bold}
-footer{margin-top:40px;background:#111827;color:white;text-align:center;padding:25px}
-footer a{color:#60a5fa}
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f3f4f6;
+    font-family:Arial,sans-serif;
+    color:#111827;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:25px;
+}
+
+header p{
+    margin:8px 0 0;
+    color:#d1d5db;
+}
+
+nav{
+    background:#1f2937;
+    text-align:center;
+    padding:10px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 12px;
+}
+
+.container{
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.stats{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    border-radius:10px;
+    padding:15px;
+    flex:1;
+    text-align:center;
+    box-shadow:0 2px 8px #0001;
+}
+
+.stat-number{
+    font-size:24px;
+    font-weight:bold;
+    display:block;
+}
+
+.stat-title{
+    color:#6b7280;
+    margin-top:5px;
+}
+
+.like-button{
+    border:0;
+    background:#b91c1c;
+    color:white;
+    padding:10px 18px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:8px;
+}
+
+.like-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.breaking{
+    background:#b91c1c;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px #0001;
+}
+
+.card h2{
+    margin-top:0;
+}
+
+.category{
+    color:#b91c1c;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.card img{
+    max-width:100%;
+    width:100%;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+
+.card video{
+    max-width:100%;
+    width:100%;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.card audio{
+    width:100%;
+    margin-top:10px;
+}
+
+footer{
+    margin-top:40px;
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+footer a{
+    color:#60a5fa;
+}
+
+@media(max-width:600px){
+    .stats{
+        flex-direction:column;
+    }
+
+    nav a{
+        display:inline-block;
+        margin:5px 8px;
+    }
+}
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>🇸🇾 شبكة سوريا نيوز</h1>
-<p>صوت الحق والواقع</p>
+    <h1>شبكة سوريا نيوز 🇸🇾</h1>
+    <p>صوت الحق والواقع</p>
 </header>
 
 <nav>
-<a href="index.html">الرئيسية</a>
-<a href="news.html">الأخبار</a>
-<a href="https://t.me/suryainternetniuz" target="_blank">قناتنا على تيليجرام</a>
+    <a href="index.html">الرئيسية</a>
+    <a href="#news">آخر الأخبار</a>
 </nav>
 
 <div class="container">
 
-<div class="breaking">
-🔴 عاجل — شبكة سوريا نيوز
-</div>
+    <div class="stats">
 
-<div class="card">
-<div class="category">سوريا</div>
-<h2>مرحباً بكم في الموقع الرسمي لشبكة سوريا نيوز</h2>
-<p>
-موقع شبكة سوريا نيوز لنشر آخر الأخبار والتطورات في سوريا والمنطقة.
-</p>
-</div>
+        <div class="stat">
+            <span class="stat-number" id="visitorCount">0</span>
+            <div class="stat-title">👁️ الزيارات</div>
+        </div>
 
-<div id="newsContainer">
-<div class="card">
-<h2>📰 آخر الأخبار</h2>
-<p>جاري تحميل الأخبار...</p>
-</div>
-</div>
+        <div class="stat">
+            <span class="stat-number" id="likeCount">0</span>
+            <div class="stat-title">❤️ الإعجابات</div>
+
+            <button
+                class="like-button"
+                id="likeButton"
+                onclick="addLike()"
+            >
+                ❤️ إعجاب
+            </button>
+        </div>
+
+    </div>
+
+    <div class="breaking">
+        📰 شبكة سوريا نيوز — آخر الأخبار والتطورات في سوريا.
+    </div>
+
+    <div id="news">
+        <div id="newsContainer">
+            <div class="card">
+                <h2>📰 آخر الأخبار</h2>
+                <p>جاري تحميل الأخبار...</p>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 <footer>
-<p>شبكة سوريا نيوز 🇸🇾</p>
-<p>صوت الحق والواقع</p>
-<p>
-<a href="https://t.me/suryainternetniuz" target="_blank">
-قناة تيليجرام
-</a>
-</p>
+    <p>شبكة سوريا نيوز 🇸🇾</p>
+
+    <p>
+        <a href="https://t.me/suryainternetniuz" target="_blank">
+            قناة التلغرام
+        </a>
+    </p>
 </footer>
 
-</body>
-</html>
-
 <script>
-async function loadNews(){
 
-    const container = document.getElementById("newsContainer");
+/* =========================
+   SUPABASE
+========================= */
 
-    try {
-        const response = await fetch("news.json?time=" + Date.now());
+const SUPABASE_URL =
+    "https://bgypexbbkcrqdcytwnww.supabase.co";
 
-        if(!response.ok){
-            throw new Error("news.json غير موجود");
+const SUPABASE_KEY =
+    "sb_publishable_Ybdh7eQMoOEOAdtLxltLRw_oRKUOHx-";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   الإحصائيات
+========================= */
+
+async function loadStats(){
+
+    try{
+
+        const { data, error } =
+            await supabaseClient
+            .from("site_stats")
+            .select("total_visits,total_likes")
+            .eq("id",1)
+            .single();
+
+        if(error){
+            console.error("Stats error:",error);
+            return;
         }
 
-        const news = await response.json();
+        if(data){
+
+            document.getElementById("visitorCount").textContent =
+                Number(data.total_visits || 0).toLocaleString("ar");
+
+            document.getElementById("likeCount").textContent =
+                Number(data.total_likes || 0).toLocaleString("ar");
+        }
+
+    }catch(error){
+
+        console.error(error);
+    }
+}
+
+
+/* =========================
+   تسجيل زيارة
+========================= */
+
+async function addVisit(){
+
+    try{
+
+        await supabaseClient.rpc(
+            "increment_visits"
+        );
+
+    }catch(error){
+
+        console.error("Visit error:",error);
+    }
+
+}
+
+
+/* =========================
+   إضافة إعجاب
+========================= */
+
+async function addLike(){
+
+    const button =
+        document.getElementById("likeButton");
+
+    button.disabled = true;
+
+    try{
+
+        const { error } =
+            await supabaseClient.rpc(
+                "increment_likes"
+            );
+
+        if(error){
+
+            console.error("Like error:",error);
+
+            button.disabled = false;
+
+            return;
+        }
+
+        button.textContent = "❤️ تم الإعجاب";
+
+        await loadStats();
+
+    }catch(error){
+
+        console.error(error);
+
+        button.disabled = false;
+    }
+
+}
+
+
+/* =========================
+   الأخبار
+========================= */
+
+async function loadNews(){
+
+    const container =
+        document.getElementById("newsContainer");
+
+    try{
+
+        const response =
+            await fetch(
+                "news.json?time=" + Date.now()
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                "news.json غير موجود"
+            );
+        }
+
+        const news =
+            await response.json();
 
         container.innerHTML = "";
 
-        if(!Array.isArray(news) || news.length === 0){
+        if(!news || news.length === 0){
+
             container.innerHTML = `
                 <div class="card">
                     <h2>📰 آخر الأخبار</h2>
                     <p>لا توجد أخبار منشورة حالياً.</p>
                 </div>
             `;
+
             return;
         }
 
+
         news.slice(0,10).forEach(item => {
 
-            const card = document.createElement("div");
+            const card =
+                document.createElement("div");
+
             card.className = "card";
+
 
             let imageHTML = "";
 
             if(item.image){
+
                 imageHTML = `
                     <img
                         src="${item.image}"
                         alt="صورة الخبر"
-                        style="max-width:100%;border-radius:10px;"
                     >
                 `;
             }
 
+
             let videoHTML = "";
 
             if(item.video){
+
                 videoHTML = `
                     <video
                         controls
                         preload="metadata"
-                        style="max-width:100%;width:100%;border-radius:10px;"
                     >
                         <source src="${item.video}">
                         متصفحك لا يدعم تشغيل الفيديو.
@@ -129,40 +424,61 @@ async function loadNews(){
                 `;
             }
 
+
             let audioHTML = "";
 
             if(item.audio){
+
                 audioHTML = `
-                    <audio controls style="width:100%;">
+                    <audio controls>
                         <source src="${item.audio}">
+                        متصفحك لا يدعم تشغيل الصوت.
                     </audio>
                 `;
             }
 
+
             card.innerHTML = `
+
                 <div class="category">
                     ${item.category || "سوريا"}
                 </div>
 
-                <h2>${item.title || ""}</h2>
+                <h2>
+                    ${item.title || ""}
+                </h2>
 
                 ${imageHTML}
 
-                <p>${item.content || ""}</p>
+                <p>
+                    ${item.content || ""}
+                </p>
 
-                <p>${item.location ? "📍 " + item.location : ""}</p>
+                ${
+                    item.location
+                    ? `<p>📍 ${item.location}</p>`
+                    : ""
+                }
 
-                <p>${item.source ? "📰 " + item.source : ""}</p>
+                ${
+                    item.source
+                    ? `<p>📰 ${item.source}</p>`
+                    : ""
+                }
 
                 ${videoHTML}
 
                 ${audioHTML}
+
             `;
 
+
             container.appendChild(card);
+
         });
 
-    } catch(error) {
+
+    }catch(error){
 
         container.innerHTML = `
             <div class="card">
@@ -173,8 +489,21 @@ async function loadNews(){
 
         console.error(error);
     }
+
 }
 
+
+/* =========================
+   تشغيل الموقع
+========================= */
+
+addVisit();
+
+loadStats();
+
 loadNews();
+
 </script>
 
+</body>
+</html>
