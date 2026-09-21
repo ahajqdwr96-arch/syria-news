@@ -1,1462 +1,358 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>شبكة سوريا نيوز 🇸🇾</title>
 
-<meta name="description" content="شبكة سوريا نيوز - آخر الأخبار السورية والعاجلة">
-
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --green:#087443;
-    --green2:#0b8a51;
-    --red:#d71920;
-    --black:#0b1117;
-    --white:#ffffff;
-    --bg:#f3f5f6;
-    --line:#dfe4e7;
-    --gray:#68747d;
-}
+*{box-sizing:border-box}
 
 body{
-    font-family:
-        Tahoma,
-        Arial,
-        "Noto Sans Arabic",
-        sans-serif;
-
-    background:var(--bg);
-    color:#111820;
-    line-height:1.8;
+    margin:0;
+    background:#f3f4f6;
+    font-family:Arial,sans-serif;
+    color:#111;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
+header{
+    background:#111827;
+    color:white;
+    padding:20px;
+    text-align:center;
 }
 
-button{
-    font-family:inherit;
-}
-
-/* =========================
-   TOP HEADER
-========================= */
-
-.top{
-    background:#fff;
-    border-bottom:1px solid var(--line);
-}
-
-.top-inner{
-    max-width:1250px;
-    margin:auto;
-    min-height:82px;
-    padding:12px 20px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.flag{
-    width:64px;
-    height:43px;
-    border-radius:5px;
-    overflow:hidden;
-    box-shadow:0 3px 12px rgba(0,0,0,.15);
-}
-
-.flag svg{
-    width:100%;
-    height:100%;
-}
-
-.brand-name{
+header h1{
+    margin:0;
     font-size:25px;
-    font-weight:950;
 }
 
-.brand-desc{
-    font-size:11px;
-    color:var(--gray);
+header p{
+    margin:8px 0 0;
+    color:#d1d5db;
 }
 
-/* =========================
-   NAV
-========================= */
-
-.nav{
-    background:#fff;
-    border-bottom:1px solid var(--line);
+nav{
+    background:#1f2937;
+    text-align:center;
+    padding:10px;
 }
 
-.nav-inner{
-    max-width:1250px;
-    margin:auto;
-
-    padding:0 20px;
-
-    display:flex;
-    align-items:center;
-    gap:5px;
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 12px;
 }
-
-.nav a{
-    padding:12px 18px;
-    font-size:13px;
-    font-weight:900;
-    color:#303a42;
-    position:relative;
-}
-
-.nav a.active{
-    color:var(--green);
-}
-
-.nav a.active::after{
-    content:"";
-
-    position:absolute;
-    right:15px;
-    left:15px;
-    bottom:0;
-
-    height:3px;
-
-    background:var(--green);
-}
-
-/* =========================
-   BREAKING
-========================= */
-
-.breaking{
-    background:var(--black);
-    color:#fff;
-}
-
-.breaking-inner{
-    max-width:1250px;
-    margin:auto;
-
-    min-height:44px;
-    padding:0 20px;
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.breaking-label{
-    background:var(--red);
-
-    padding:2px 13px;
-    border-radius:4px;
-
-    font-size:11px;
-    font-weight:900;
-}
-
-.breaking-text{
-    font-size:12px;
-
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-
-/* =========================
-   MAIN
-========================= */
 
 .container{
-    max-width:1250px;
-    margin:auto;
-    padding:28px 20px 70px;
+    max-width:1000px;
+    margin:25px auto;
+    padding:0 15px;
 }
 
-.section-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin:25px 0 16px;
-
-    border-bottom:2px solid #111820;
+.breaking{
+    background:#b91c1c;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-weight:bold;
 }
 
-.section-head h2{
-    padding-bottom:8px;
-
-    font-size:21px;
-    font-weight:950;
-}
-
-.section-head span{
-    color:var(--green);
-    font-size:11px;
-    font-weight:900;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,1.7fr)
-        minmax(300px,.85fr);
-
-    gap:22px;
-}
-
-/* MAIN STORY */
-
-.main-story{
-    position:relative;
-
-    min-height:475px;
-
-    overflow:hidden;
-
-    background:#111;
-
-    border-radius:4px;
-}
-
-.main-story img{
-    width:100%;
-    height:475px;
-
-    object-fit:cover;
-
-    display:block;
-
-    transition:transform .5s ease;
-}
-
-.main-story:hover img{
-    transform:scale(1.025);
-}
-
-.main-overlay{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    align-items:flex-end;
-
-    padding:32px;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(0,0,0,.94),
-            rgba(0,0,0,.50) 45%,
-            transparent 78%
-        );
-}
-
-.main-content{
-    color:#fff;
-    max-width:850px;
-}
-
-.tag{
-    display:inline-block;
-
-    background:var(--red);
-    color:#fff;
-
-    padding:2px 10px;
-
-    border-radius:3px;
-
-    font-size:10px;
-    font-weight:900;
-}
-
-.main-title{
-    margin-top:9px;
-
-    font-size:31px;
-    line-height:1.5;
-
-    font-weight:950;
-}
-
-.main-info{
-    margin-top:7px;
-
-    color:#d8dee2;
-
-    font-size:11px;
-}
-
-/* =========================
-   SIDE
-========================= */
-
-.side{
-    background:#fff;
-
-    border:1px solid var(--line);
-
-    border-radius:4px;
-
-    overflow:hidden;
-}
-
-.side-title{
-    padding:13px 16px;
-
-    background:#111820;
-    color:#fff;
-
-    font-size:14px;
-    font-weight:950;
-}
-
-.side-item{
-    display:grid;
-
-    grid-template-columns:105px 1fr;
-
-    min-height:105px;
-
-    border-bottom:1px solid var(--line);
-}
-
-.side-item:last-child{
-    border-bottom:0;
-}
-
-.side-img{
-    background:#e6eaec;
-    overflow:hidden;
-}
-
-.side-img img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.side-body{
-    padding:10px 12px;
-}
-
-.side-body .tag{
-    background:var(--green);
-}
-
-.side-body h3{
-    margin-top:5px;
-
-    font-size:13px;
-    line-height:1.65;
-
-    font-weight:900;
-
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-}
-
-/* =========================
-   LATEST
-========================= */
-
-.latest-layout{
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,1fr)
-        300px;
-
-    gap:22px;
-}
-
-.news-list{
-    background:#fff;
-
-    border-top:3px solid #111820;
-}
-
-.news-item{
-    display:grid;
-
-    grid-template-columns:
-        205px
-        1fr;
-
-    gap:17px;
-
-    padding:17px;
-
-    border-bottom:1px solid var(--line);
-
-    transition:background .2s ease;
-}
-
-.news-item:hover{
-    background:#f7f9fa;
-}
-
-.news-img{
-    height:145px;
-
-    overflow:hidden;
-
-    background:#e5e9eb;
-}
-
-.news-img img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:transform .4s ease;
-}
-
-.news-item:hover .news-img img{
-    transform:scale(1.04);
-}
-
-.news-body{
-    min-width:0;
-}
-
-.news-body h3{
-    margin:7px 0;
-
-    font-size:19px;
-    line-height:1.6;
-
-    font-weight:950;
-}
-
-.news-body p{
-    color:var(--gray);
-
-    font-size:12px;
-    line-height:1.8;
-
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-
-    overflow:hidden;
-}
-
-.news-meta{
-    margin-top:8px;
-
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-
-    color:#89949c;
-
-    font-size:10px;
-}
-
-/* =========================
-   MOST READ
-========================= */
-
-.most{
-    background:#fff;
-
-    border-top:3px solid var(--green);
-
-    height:max-content;
-}
-
-.most-title{
-    padding:13px 15px;
-
-    font-size:16px;
-    font-weight:950;
-
-    border-bottom:1px solid var(--line);
-}
-
-.most-item{
-    display:flex;
-
-    gap:12px;
-
-    padding:14px;
-
-    border-bottom:1px solid var(--line);
-}
-
-.number{
-    min-width:30px;
-
-    font-size:25px;
-    line-height:1;
-
-    color:var(--green);
-
-    font-weight:950;
-}
-
-.most-item h3{
-    font-size:12px;
-    line-height:1.7;
-}
-
-/* =========================
-   VIDEO
-========================= */
-
-.video-section{
-    margin-top:35px;
-
-    background:#10171e;
-
-    padding:20px;
-
-    color:#fff;
-}
-
-.video-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
+.card{
+    background:white;
+    border-radius:10px;
+    padding:18px;
     margin-bottom:15px;
+    box-shadow:0 2px 8px #0001;
 }
 
-.video-head h2{
-    font-size:19px;
-    font-weight:950;
+.card h2{
+    margin-top:8px;
 }
 
-.video-head span{
-    color:#8dd4ae;
-    font-size:11px;
+.category{
+    color:#b91c1c;
+    font-weight:bold;
 }
 
-.video-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:14px;
-}
-
-.video-card{
-    background:#182129;
-}
-
-.video-image{
-    height:170px;
-
-    background:#202b33;
-
-    overflow:hidden;
-
-    position:relative;
-}
-
-.video-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.play{
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:48px;
-    height:48px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.94);
-
-    color:#111;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:19px;
-}
-
-.video-card h3{
-    padding:11px;
-
-    font-size:12px;
-    line-height:1.7;
-}
-
-/* =========================
-   EMPTY
-========================= */
-
-.empty{
-    padding:55px 20px;
-
-    text-align:center;
-
-    background:#fff;
-
-    color:var(--gray);
-
+.meta{
+    color:#666;
     font-size:13px;
+    margin:8px 0;
 }
 
-/* =========================
-   FOOTER
-========================= */
+.card img{
+    width:100%;
+    max-height:500px;
+    object-fit:cover;
+    border-radius:9px;
+    margin-top:10px;
+}
+
+.card video{
+    width:100%;
+    border-radius:9px;
+    margin-top:10px;
+}
+
+.card audio{
+    width:100%;
+    margin-top:10px;
+}
+
+.read-more{
+    display:inline-block;
+    margin-top:12px;
+    background:#1683ff;
+    color:white;
+    text-decoration:none;
+    padding:10px 15px;
+    border-radius:7px;
+}
+
+.loading{
+    text-align:center;
+    padding:25px;
+    color:#666;
+}
+
+.error{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:15px;
+    border-radius:8px;
+}
 
 footer{
-    background:#0b1117;
-    color:#fff;
-
     margin-top:40px;
-}
-
-.footer-inner{
-    max-width:1250px;
-    margin:auto;
-
-    padding:38px 20px;
-
-    display:flex;
-    justify-content:space-between;
-
-    gap:30px;
-}
-
-.footer-brand{
-    font-size:21px;
-    font-weight:950;
-}
-
-.footer-text{
-    max-width:600px;
-
-    margin-top:7px;
-
-    color:#9ba7af;
-
-    font-size:11px;
-    line-height:2;
-}
-
-.footer-channel{
-    color:#8dd4ae;
-    font-size:11px;
-}
-
-.copy{
-    border-top:1px solid #202a32;
-
-    padding:13px;
-
+    background:#111827;
+    color:white;
     text-align:center;
-
-    color:#64717b;
-
-    font-size:9px;
+    padding:25px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:950px){
-
-    .hero{
-        grid-template-columns:1fr;
-    }
-
-    .latest-layout{
-        grid-template-columns:1fr;
-    }
-
-    .video-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
+footer a{
+    color:#60a5fa;
 }
-
-@media(max-width:650px){
-
-    .top-inner{
-        min-height:70px;
-        padding:10px 13px;
-    }
-
-    .flag{
-        width:52px;
-        height:35px;
-    }
-
-    .brand-name{
-        font-size:19px;
-    }
-
-    .brand-desc{
-        font-size:9px;
-    }
-
-    .nav-inner{
-        overflow-x:auto;
-        padding:0 10px;
-    }
-
-    .nav a{
-        white-space:nowrap;
-        padding:10px 14px;
-    }
-
-    .breaking-inner{
-        padding:0 12px;
-    }
-
-    .container{
-        padding:18px 12px 50px;
-    }
-
-    .main-story{
-        min-height:350px;
-    }
-
-    .main-story img{
-        height:350px;
-    }
-
-    .main-overlay{
-        padding:20px;
-    }
-
-    .main-title{
-        font-size:22px;
-    }
-
-    .side-item{
-        grid-template-columns:95px 1fr;
-        min-height:95px;
-    }
-
-    .news-item{
-        grid-template-columns:115px 1fr;
-        gap:11px;
-        padding:12px;
-    }
-
-    .news-img{
-        height:105px;
-    }
-
-    .news-body h3{
-        font-size:14px;
-        margin:3px 0;
-    }
-
-    .news-body p{
-        font-size:10px;
-        -webkit-line-clamp:2;
-    }
-
-    .video-grid{
-        grid-template-columns:1fr;
-    }
-
-    .video-image{
-        height:190px;
-    }
-
-    .footer-inner{
-        flex-direction:column;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
-<header class="top">
-
-<div class="top-inner">
-
-<a href="./index.html" class="brand">
-
-<div class="flag">
-
-<svg
-viewBox="0 0 90 60"
-xmlns="http://www.w3.org/2000/svg"
->
-
-<rect width="90" height="20" fill="#007A3D"/>
-<rect y="20" width="90" height="20" fill="#fff"/>
-<rect y="40" width="90" height="20" fill="#000"/>
-
-<polygon points="28,27 30,33 36,33 31,37 33,43 28,39 23,43 25,37 20,33 26,33" fill="#CE1126"/>
-<polygon points="45,27 47,33 53,33 48,37 50,43 45,39 40,43 42,37 37,33 43,33" fill="#CE1126"/>
-<polygon points="62,27 64,33 70,33 65,37 67,43 62,39 57,43 59,37 54,33 60,33" fill="#CE1126"/>
-
-</svg>
-
-</div>
-
-<div>
-
-<div class="brand-name">
-شبكة سوريا نيوز
-</div>
-
-<div class="brand-desc">
-صوت الخبر السوري
-</div>
-
-</div>
-
-</a>
-
-</div>
-
+<header>
+<h1>🇸🇾 شبكة سوريا نيوز</h1>
+<p>صوت الحق والواقع</p>
 </header>
 
-<!-- ================= NAV ================= -->
-
-<nav class="nav">
-
-<div class="nav-inner">
-
-<a
-href="#latest"
-class="active"
->
-الرئيسية
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="news.html">الأخبار</a>
+<a href="https://t.me/suryainternetniuz" target="_blank">
+قناتنا على تيليجرام
 </a>
-
-<a href="#latest">
-آخر الأخبار
-</a>
-
-<a href="#most">
-الأكثر قراءة
-</a>
-
-<a href="#videos">
-فيديو
-</a>
-
-</div>
-
 </nav>
 
-<!-- ================= BREAKING ================= -->
+<div class="container">
 
 <div class="breaking">
-
-<div class="breaking-inner">
-
-<div class="breaking-label">
-عاجل
+🔴 عاجل — شبكة سوريا نيوز
 </div>
 
-<div
-id="breakingText"
-class="breaking-text"
->
-جاري تحميل الأخبار...
+<div id="newsContainer">
+<div class="loading">
+⏳ جاري تحميل آخر الأخبار...
+</div>
 </div>
 
 </div>
-
-</div>
-
-<!-- ================= CONTENT ================= -->
-
-<main class="container">
-
-<div class="section-head">
-
-<h2>
-الواجهة الرئيسية
-</h2>
-
-<span>
-شبكة سوريا نيوز
-</span>
-
-</div>
-
-<section class="hero">
-
-<div id="heroMain">
-
-<div class="empty">
-جاري تحميل الخبر الرئيسي...
-</div>
-
-</div>
-
-<div
-class="side"
-id="heroSide"
->
-
-<div class="side-title">
-آخر المستجدات
-</div>
-
-<div class="empty">
-جاري التحميل...
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= LATEST ================= -->
-
-<div
-class="section-head"
-id="latest"
->
-
-<h2>
-آخر الأخبار
-</h2>
-
-<span>
-تحديث مستمر
-</span>
-
-</div>
-
-<section class="latest-layout">
-
-<div
-id="newsList"
-class="news-list"
->
-
-<div class="empty">
-جاري تحميل الأخبار...
-</div>
-
-</div>
-
-<aside
-id="most"
-class="most"
->
-
-<div class="most-title">
-🔥 الأكثر قراءة
-</div>
-
-<div id="mostList">
-
-<div class="empty">
-جاري التحميل...
-</div>
-
-</div>
-
-</aside>
-
-</section>
-
-<!-- ================= VIDEO ================= -->
-
-<section
-id="videos"
-class="video-section"
->
-
-<div class="video-head">
-
-<h2>
-🎥 فيديو
-</h2>
-
-<span>
-أحدث المقاطع
-</span>
-
-</div>
-
-<div
-id="videoGrid"
-class="video-grid"
->
-
-<div class="empty">
-لا توجد فيديوهات حالياً.
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-<!-- ================= FOOTER ================= -->
 
 <footer>
 
-<div class="footer-inner">
+<p>شبكة سوريا نيوز 🇸🇾</p>
 
-<div>
+<p>صوت الحق والواقع</p>
 
-<div class="footer-brand">
-شبكة سوريا نيوز 🇸🇾
-</div>
-
-<div class="footer-text">
-شبكة إخبارية مستقلة تهتم بنقل الأخبار والتطورات السورية بشكل مباشر وواضح.
-</div>
-
-</div>
-
-<div class="footer-channel">
-قناتنا على تيليجرام<br>
-t.me/suryainternetniuz
-</div>
-
-</div>
-
-<div class="copy">
-© 2026 شبكة سوريا نيوز — جميع الحقوق محفوظة
-</div>
+<p>
+<a href="https://t.me/suryainternetniuz" target="_blank">
+قناة تيليجرام
+</a>
+</p>
 
 </footer>
 
+
 <script>
 
-"use strict";
+async function loadNews(){
 
-/* =========================
-   NEWS FILE
-========================= */
+    const container =
+        document.getElementById("newsContainer");
 
-const NEWS_FILE = "./news.json";
+    try{
 
-/* =========================
-   HELPERS
-========================= */
+        const response =
+            await fetch(
+                "news.json?time=" + Date.now()
+            );
 
-function escapeHTML(value){
+        if(!response.ok){
 
-    if(value === null || value === undefined){
-        return "";
-    }
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-function formatDate(value){
-
-    if(!value){
-        return "";
-    }
-
-    const date = new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-        return "";
-    }
-
-    return date.toLocaleString(
-        "ar-SY",
-        {
-            year:"numeric",
-            month:"short",
-            day:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    );
-}
-
-function articleURL(id){
-
-    return "./article.html?id=" +
-        encodeURIComponent(id);
-}
-
-function imageHTML(url){
-
-    if(!url){
-
-        return `
-        <div
-        style="
-        height:100%;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:#7c8992;
-        font-size:11px;
-        "
-        >
-        شبكة سوريا نيوز
-        </div>
-        `;
-
-    }
-
-    return `
-    <img
-    src="${escapeHTML(url)}"
-    loading="lazy"
-    decoding="async"
-    alt="صورة الخبر"
-    >
-    `;
-
-}
-
-/* =========================
-   HERO
-========================= */
-
-function createHero(news){
-
-    const main =
-        document.getElementById("heroMain");
-
-    const side =
-        document.getElementById("heroSide");
-
-    main.innerHTML = "";
-    side.innerHTML = `
-        <div class="side-title">
-            آخر المستجدات
-        </div>
-    `;
-
-    if(!news.length){
-
-        main.innerHTML = `
-            <div class="empty">
-                لا توجد أخبار حالياً.
-            </div>
-        `;
-
-        return;
-    }
-
-    const first = news[0];
-
-    main.innerHTML = `
-
-    <a href="${articleURL(first.id)}">
-
-    <div class="main-story">
-
-        ${
-            first.image
-            ?
-            `
-            <img
-            src="${escapeHTML(first.image)}"
-            loading="eager"
-            alt="الخبر الرئيسي"
-            >
-            `
-            :
-            `
-            <div
-            style="
-            height:475px;
-            background:linear-gradient(135deg,#087443,#10171e);
-            "
-            ></div>
-            `
-        }
-
-        <div class="main-overlay">
-
-        <div class="main-content">
-
-        <span class="tag">
-        ${escapeHTML(first.category || "خبر")}
-        </span>
-
-        <div class="main-title">
-        ${escapeHTML(first.title || "")}
-        </div>
-
-        <div class="main-info">
-
-        ${
-            first.location
-            ?
-            "📍 " + escapeHTML(first.location)
-            :
-            ""
-        }
-
-        ${
-            first.location && first.created_at
-            ?
-            " • "
-            :
-            ""
-        }
-
-        ${formatDate(first.created_at)}
-
-        </div>
-
-        </div>
-
-        </div>
-
-    </div>
-
-    </a>
-
-    `;
-
-    news.slice(1,5).forEach(item => {
-
-        side.insertAdjacentHTML(
-            "beforeend",
-            `
-
-            <a
-            href="${articleURL(item.id)}"
-            class="side-item"
-            >
-
-            <div class="side-img">
-
-            ${imageHTML(item.image)}
-
-            </div>
-
-            <div class="side-body">
-
-            <span class="tag">
-            ${escapeHTML(item.category || "خبر")}
-            </span>
-
-            <h3>
-            ${escapeHTML(item.title || "")}
-            </h3>
-
-            </div>
-
-            </a>
-
-            `
-        );
-
-    });
-
-}
-
-/* =========================
-   LATEST NEWS
-========================= */
-
-function createLatest(news){
-
-    const list =
-        document.getElementById("newsList");
-
-    list.innerHTML = "";
-
-    if(!news.length){
-
-        list.innerHTML = `
-        <div class="empty">
-        لا توجد أخبار حالياً.
-        </div>
-        `;
-
-        return;
-    }
-
-    news.forEach(item => {
-
-        list.insertAdjacentHTML(
-            "beforeend",
-            `
-
-            <article class="news-item">
-
-            <a
-            class="news-img"
-            href="${articleURL(item.id)}"
-            >
-
-            ${imageHTML(item.image)}
-
-            </a>
-
-            <div class="news-body">
-
-            <span class="tag">
-            ${escapeHTML(item.category || "خبر")}
-            </span>
-
-            <a href="${articleURL(item.id)}">
-
-            <h3>
-            ${escapeHTML(item.title || "")}
-            </h3>
-
-            </a>
-
-            <p>
-            ${escapeHTML(item.content || "")}
-            </p>
-
-            <div class="news-meta">
-
-            ${
-                item.location
-                ?
-                `<span>📍 ${escapeHTML(item.location)}</span>`
-                :
-                ""
-            }
-
-            ${
-                item.source
-                ?
-                `<span>✍️ ${escapeHTML(item.source)}</span>`
-                :
-                ""
-            }
-
-            ${
-                item.created_at
-                ?
-                `<span>🕒 ${formatDate(item.created_at)}</span>`
-                :
-                ""
-            }
-
-            </div>
-
-            </div>
-
-            </article>
-
-            `
-        );
-
-    });
-
-}
-
-/* =========================
-   MOST READ
-========================= */
-
-function createMost(news){
-
-    const box =
-        document.getElementById("mostList");
-
-    box.innerHTML = "";
-
-    if(!news.length){
-
-        box.innerHTML = `
-        <div class="empty">
-        لا توجد أخبار.
-        </div>
-        `;
-
-        return;
-    }
-
-    news.slice(0,7).forEach(
-        (item,index) => {
-
-            box.insertAdjacentHTML(
-                "beforeend",
-                `
-
-                <a
-                href="${articleURL(item.id)}"
-                class="most-item"
-                >
-
-                <div class="number">
-                ${index + 1}
-                </div>
-
-                <h3>
-                ${escapeHTML(item.title || "")}
-                </h3>
-
-                </a>
-
-                `
+            throw new Error(
+                "news.json غير موجود"
             );
 
         }
-    );
+
+        const news =
+            await response.json();
+
+        container.innerHTML = "";
+
+        if(!Array.isArray(news) || news.length === 0){
+
+            container.innerHTML = `
+                <div class="card">
+                    <h2>📰 آخر الأخبار</h2>
+                    <p>لا توجد أخبار منشورة حالياً.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        news.slice(0,10).forEach(item => {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "card";
+
+
+            let imageHTML = "";
+
+            if(item.image){
+
+                imageHTML = `
+                    <img
+                        src="${item.image}"
+                        alt="صورة الخبر"
+                    >
+                `;
+
+            }
+
+
+            let videoHTML = "";
+
+            if(item.video){
+
+                videoHTML = `
+                    <video
+                        controls
+                        preload="metadata"
+                    >
+                        <source
+                            src="${item.video}"
+                        >
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                `;
+
+            }
+
+
+            let audioHTML = "";
+
+            if(item.audio){
+
+                audioHTML = `
+                    <audio
+                        controls
+                    >
+                        <source
+                            src="${item.audio}"
+                        >
+                        متصفحك لا يدعم تشغيل الصوت.
+                    </audio>
+                `;
+
+            }
+
+
+            let date = "";
+
+            if(item.created_at){
+
+                date =
+                    new Date(
+                        item.created_at
+                    ).toLocaleString(
+                        "ar-SY"
+                    );
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="category">
+                    ${item.category || "سوريا"}
+                </div>
+
+                <h2>
+                    ${item.title || ""}
+                </h2>
+
+                <div class="meta">
+                    ${item.location ? "📍 " + item.location : ""}
+                    ${item.source ? " | ✍️ " + item.source : ""}
+                    ${date ? " | 🕐 " + date : ""}
+                </div>
+
+                ${imageHTML}
+
+                <p>
+                    ${item.content || ""}
+                </p>
+
+                ${videoHTML}
+
+                ${audioHTML}
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+
+    }catch(error){
+
+        container.innerHTML = `
+
+            <div class="error">
+
+                ❌ تعذر تحميل الأخبار.
+
+                <br><br>
+
+                ${error.message}
+
+            </div>
+
+        `;
+
+    }
 
 }
 
-/* =========================
-   VIDEOS
-========================= */
 
-function createVideos(news){
+loadNews();
 
-    const grid =
-        document.getElementById("videoGrid");
+</script>
 
-    const videos =
-        news.filter(
-            item =>
-            
+</body>
+</html>
