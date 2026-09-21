@@ -4,137 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>شبكة سوريا نيوز 🇸🇾</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-    margin:0;
-    background:#f3f4f6;
-    font-family:Arial,sans-serif;
-    color:#111;
-}
-
-header{
-    background:#111827;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-header h1{
-    margin:0;
-    font-size:25px;
-}
-
-header p{
-    margin:8px 0 0;
-    color:#d1d5db;
-}
-
-nav{
-    background:#1f2937;
-    text-align:center;
-    padding:10px;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 12px;
-}
-
-.container{
-    max-width:1000px;
-    margin:25px auto;
-    padding:0 15px;
-}
-
-.breaking{
-    background:#b91c1c;
-    color:white;
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:20px;
-    font-weight:bold;
-}
-
-.card{
-    background:white;
-    border-radius:10px;
-    padding:18px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px #0001;
-}
-
-.card h2{
-    margin-top:8px;
-}
-
-.category{
-    color:#b91c1c;
-    font-weight:bold;
-}
-
-.meta{
-    color:#666;
-    font-size:13px;
-    margin:8px 0;
-}
-
-.card img{
-    width:100%;
-    max-height:500px;
-    object-fit:cover;
-    border-radius:9px;
-    margin-top:10px;
-}
-
-.card video{
-    width:100%;
-    border-radius:9px;
-    margin-top:10px;
-}
-
-.card audio{
-    width:100%;
-    margin-top:10px;
-}
-
-.read-more{
-    display:inline-block;
-    margin-top:12px;
-    background:#1683ff;
-    color:white;
-    text-decoration:none;
-    padding:10px 15px;
-    border-radius:7px;
-}
-
-.loading{
-    text-align:center;
-    padding:25px;
-    color:#666;
-}
-
-.error{
-    background:#fee2e2;
-    color:#991b1b;
-    padding:15px;
-    border-radius:8px;
-}
-
-footer{
-    margin-top:40px;
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:25px;
-}
-
-footer a{
-    color:#60a5fa;
-}
+body{margin:0;background:#f3f4f6;font-family:Arial,sans-serif;color:#111}
+header{background:#111827;color:white;padding:20px;text-align:center}
+header h1{margin:0;font-size:25px}
+header p{margin:8px 0 0;color:#d1d5db}
+nav{background:#1f2937;text-align:center;padding:10px}
+nav a{color:white;text-decoration:none;margin:0 12px}
+.container{max-width:1000px;margin:25px auto;padding:0 15px}
+.breaking{background:#b91c1c;color:white;padding:12px;border-radius:8px;margin-bottom:20px;font-weight:bold}
+.card{background:white;border-radius:10px;padding:18px;margin-bottom:15px;box-shadow:0 2px 8px #0001}
+.card h2{margin-top:0}
+.category{color:#b91c1c;font-weight:bold}
+footer{margin-top:40px;background:#111827;color:white;text-align:center;padding:25px}
+footer a{color:#60a5fa}
 </style>
 </head>
 
@@ -148,9 +32,7 @@ footer a{
 <nav>
 <a href="index.html">الرئيسية</a>
 <a href="news.html">الأخبار</a>
-<a href="https://t.me/suryainternetniuz" target="_blank">
-قناتنا على تيليجرام
-</a>
+<a href="https://t.me/suryainternetniuz" target="_blank">قناتنا على تيليجرام</a>
 </nav>
 
 <div class="container">
@@ -159,200 +41,30 @@ footer a{
 🔴 عاجل — شبكة سوريا نيوز
 </div>
 
-<div id="newsContainer">
-<div class="loading">
-⏳ جاري تحميل آخر الأخبار...
+<div class="card">
+<div class="category">سوريا</div>
+<h2>مرحباً بكم في الموقع الرسمي لشبكة سوريا نيوز</h2>
+<p>
+موقع شبكة سوريا نيوز لنشر آخر الأخبار والتطورات في سوريا والمنطقة.
+</p>
 </div>
+
+<div class="card">
+<h2>📰 آخر الأخبار</h2>
+<p>سيتم إضافة الأخبار هنا تباعاً.</p>
 </div>
 
 </div>
 
 <footer>
-
 <p>شبكة سوريا نيوز 🇸🇾</p>
-
 <p>صوت الحق والواقع</p>
-
 <p>
 <a href="https://t.me/suryainternetniuz" target="_blank">
 قناة تيليجرام
 </a>
 </p>
-
 </footer>
-
-
-<script>
-
-async function loadNews(){
-
-    const container =
-        document.getElementById("newsContainer");
-
-    try{
-
-        const response =
-            await fetch(
-                "news.json?time=" + Date.now()
-            );
-
-        if(!response.ok){
-
-            throw new Error(
-                "news.json غير موجود"
-            );
-
-        }
-
-        const news =
-            await response.json();
-
-        container.innerHTML = "";
-
-        if(!Array.isArray(news) || news.length === 0){
-
-            container.innerHTML = `
-                <div class="card">
-                    <h2>📰 آخر الأخبار</h2>
-                    <p>لا توجد أخبار منشورة حالياً.</p>
-                </div>
-            `;
-
-            return;
-        }
-
-
-        news.slice(0,10).forEach(item => {
-
-            const card =
-                document.createElement("div");
-
-            card.className = "card";
-
-
-            let imageHTML = "";
-
-            if(item.image){
-
-                imageHTML = `
-                    <img
-                        src="${item.image}"
-                        alt="صورة الخبر"
-                    >
-                `;
-
-            }
-
-
-            let videoHTML = "";
-
-            if(item.video){
-
-                videoHTML = `
-                    <video
-                        controls
-                        preload="metadata"
-                    >
-                        <source
-                            src="${item.video}"
-                        >
-                        متصفحك لا يدعم تشغيل الفيديو.
-                    </video>
-                `;
-
-            }
-
-
-            let audioHTML = "";
-
-            if(item.audio){
-
-                audioHTML = `
-                    <audio
-                        controls
-                    >
-                        <source
-                            src="${item.audio}"
-                        >
-                        متصفحك لا يدعم تشغيل الصوت.
-                    </audio>
-                `;
-
-            }
-
-
-            let date = "";
-
-            if(item.created_at){
-
-                date =
-                    new Date(
-                        item.created_at
-                    ).toLocaleString(
-                        "ar-SY"
-                    );
-
-            }
-
-
-            card.innerHTML = `
-
-                <div class="category">
-                    ${item.category || "سوريا"}
-                </div>
-
-                <h2>
-                    ${item.title || ""}
-                </h2>
-
-                <div class="meta">
-                    ${item.location ? "📍 " + item.location : ""}
-                    ${item.source ? " | ✍️ " + item.source : ""}
-                    ${date ? " | 🕐 " + date : ""}
-                </div>
-
-                ${imageHTML}
-
-                <p>
-                    ${item.content || ""}
-                </p>
-
-                ${videoHTML}
-
-                ${audioHTML}
-
-            `;
-
-
-            container.appendChild(card);
-
-        });
-
-
-    }catch(error){
-
-        container.innerHTML = `
-
-            <div class="error">
-
-                ❌ تعذر تحميل الأخبار.
-
-                <br><br>
-
-                ${error.message}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-loadNews();
-
-</script>
 
 </body>
 </html>
