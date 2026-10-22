@@ -120,6 +120,18 @@ button:disabled{
     text-align:center;
 }
 </style>
+
+<style>
+.syrian-flag {
+  width: 30px;
+  height: 20px;
+  object-fit: cover;
+  vertical-align: middle;
+  display: inline-block;
+  border-radius: 2px;
+}
+</style>
+
 </head>
 
 <body>
@@ -129,7 +141,7 @@ button:disabled{
 
 <div class="box">
 
-<h1>📰 شبكة سوريا نيوز 🇸🇾</h1>
+<h1>📰 شبكة سوريا نيوز <img src="syrian-free-flag.svg" alt="العلم السوري الحر" class="syrian-flag"></h1>
 
 <label>🔐 GitHub Token</label>
 <input
@@ -148,7 +160,7 @@ button:disabled{
 <label>🏷️ تصنيف الخبر</label>
 <select id="category">
     <option value="عاجل">🔴 عاجل</option>
-    <option value="سوريا">🇸🇾 سوريا</option>
+    <option value="سوريا"><img src="syrian-free-flag.svg" alt="العلم السوري الحر" class="syrian-flag"> سوريا</option>
     <option value="حرب">⚔️ حرب</option>
     <option value="أمن">🛡️ أمن</option>
     <option value="سياسة">🏛️ سياسة</option>
@@ -269,7 +281,7 @@ button:disabled{
 </div>
 
 <div class="note">
-شبكة سوريا نيوز 🇸🇾
+شبكة سوريا نيوز <img src="syrian-free-flag.svg" alt="العلم السوري الحر" class="syrian-flag">
 </div>
 
 </div>
