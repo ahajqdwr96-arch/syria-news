@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#b91c1c">
+<title>الأخبار العاجلة | شبكة سوريا نيوز</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f4f6;color:#111827;font-family:Arial,Tahoma,sans-serif}
+header{background:#111827;color:white;text-align:center;padding:22px 12px}
+header h1{margin:0 0 8px;font-size:25px}
+nav{background:#1f2937;padding:13px;text-align:center}
+nav a{color:white;text-decoration:none;margin:0 10px;display:inline-block}
+.container{max-width:900px;margin:22px auto;padding:0 12px}
+.heading{background:#b91c1c;color:white;border-radius:10px;padding:18px;margin-bottom:16px}
+.heading h2{margin:0 0 8px}
+.card{background:white;border-radius:10px;padding:17px;margin-bottom:15px;box-shadow:0 2px 8px #0000000d}
+.card h3{margin:8px 0 12px;line-height:1.7}
+.category{color:#b91c1c;font-weight:bold}
+.date{font-size:13px;color:#6b7280;margin-bottom:12px}
+.content{white-space:pre-wrap;line-height:1.9;overflow-wrap:anywhere}
+.card img{width:100%;max-height:400px;object-fit:contain;border-radius:8px;margin-top:12px}
+.empty,.error{background:white;padding:20px;border-radius:10px;text-align:center;line-height:1.8}
+footer{text-align:center;padding:25px;color:#6b7280}
+</style>
+</head>
+<body>
+<header>
+<h1>🇸🇾 شبكة سوريا نيوز</h1>
+<p>صوت الحق والواقع</p>
+</header>
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="news.html">الأخبار</a>
+<a href="breaking.html">🔴 الأخبار العاجلة</a>
+<a href="https://t.me/suryainternetniuz" target="_blank" rel="noopener">تيليجرام</a>
+</nav>
+<main class="container">
+<section class="heading">
+<h2>🔴 الأخبار العاجلة</h2>
+<p>تظهر الأخبار العاجلة خلال أول 24 ساعة من نشرها.</p>
+</section>
+<div id="breakingNews"><p class="empty">⏳ جارٍ تحميل الأخبار العاجلة...</p></div>
+</main>
+<footer>شبكة سوريا نيوز 🇸🇾 — صوت الحق والواقع</footer>
+<script>
+const box = document.getElementById("breakingNews");
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+function formatDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? "وقت النشر غير متوفر"
+    : date.toLocaleString("ar", {dateStyle:"medium", timeStyle:"short"});
+}
+
+async function loadBreakingNews() {
+  try {
+    const response = await fetch("news.json?t=" + Date.now(), {cache:"no-store"});
+    if (!response.ok) throw new Error("تعذر تحميل الأخبار");
+
+    const data = await response.json();
+    const news = Array.isArray(data) ? data : data.news;
+
+    if (!Array.isArray(news)) throw new Error("صيغة ملف الأخبار غير متوقعة");
+
+    const now = Date.now();
+    const active = news.filter(item => {
+      const published = Date.parse(item.created_at || "");
+      return item.is_breaking === true &&
+        Number.isFinite(published) &&
+        published <= now &&
+        now - published < 24 * 60 * 60 * 1000;
+    });
+
+    if (!active.length) {
+      box.innerHTML = '<div class="empty">لا توجد أخبار عاجلة منشورة خلال آخر 24 ساعة.</div>';
+      return;
+    }
+
+    box.innerHTML = active.map(item => `
+      <article class="card">
+        <div class="category">🔴 عاجل${item.category ? " — " + escapeHTML(item.category) : ""}</div>
+        <h3>${escapeHTML(item.title)}</h3>
+        <div class="date">وقت النشر: ${escapeHTML(formatDate(item.created_at))}</div>
+        ${item.location ? `<p>📍 ${escapeHTML(item.location)}</p>` : ""}
+        <div class="content">${escapeHTML(item.content)}</div>
+        ${item.image ? `<img src="${escapeHTML(item.image)}" alt="صورة الخبر" loading="lazy">` : ""}
+        ${item.source ? `<p class="date">المصدر: ${escapeHTML(item.source)}</p>` : ""}
+      </article>
+    `).join("");
+  } catch (error) {
+    box.innerHTML = '<div class="error">تعذر تحميل الأخبار الآن. تحقق من اتصال الإنترنت وملف news.json.</div>';
+  }
+}
+
+loadBreakingNews();
+setInterval(loadBreakingNews, 60000);
+</script>
+</body>
+</html>

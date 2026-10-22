@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الخبر - شبكة سوريا نيوز 🇸🇾</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f3f4f6;
+    font-family:Arial,Tahoma,sans-serif;
+    color:#111;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+}
+
+header p{
+    margin:8px 0 0;
+    color:#d1d5db;
+}
+
+nav{
+    background:#1f2937;
+    text-align:center;
+    padding:12px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+}
+
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.article{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px #0001;
+}
+
+.category{
+    color:#b91c1c;
+    font-weight:bold;
+}
+
+h2{
+    font-size:28px;
+    line-height:1.5;
+}
+
+.meta{
+    color:#666;
+    font-size:14px;
+    margin:12px 0;
+}
+
+.article img,
+.article video{
+    width:100%;
+    max-height:600px;
+    object-fit:contain;
+    border-radius:10px;
+    margin:15px 0;
+}
+
+.article audio{
+    width:100%;
+    margin:15px 0;
+}
+
+.content{
+    font-size:18px;
+    line-height:2;
+    white-space:pre-wrap;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+}
+
+.error{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:20px;
+    border-radius:10px;
+}
+
+footer{
+    margin-top:40px;
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+footer a{
+    color:#60a5fa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🇸🇾 شبكة سوريا نيوز</h1>
+<p>صوت الحق والواقع</p>
+</header>
+
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="news.html">الأخبار</a>
+<a href="https://t.me/suryainternetniuz" target="_blank">
+قناتنا على تيليجرام
+</a>
+</nav>
+
+<div class="container">
+
+<div id="article">
+<div class="loading">
+⏳ جاري تحميل الخبر...
+</div>
+</div>
+
+</div>
+
+<footer>
+<p>شبكة سوريا نيوز 🇸🇾</p>
+<p>صوت الحق والواقع</p>
+</footer>
+
+<script>
+
+async function loadArticle(){
+
+    const container =
+        document.getElementById("article");
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const id =
+        params.get("id");
+
+    if(!id){
+
+        container.innerHTML = `
+            <div class="error">
+                ❌ لم يتم تحديد الخبر.
+            </div>
+        `;
+
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                "news.json?time=" + Date.now()
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                "تعذر تحميل الأخبار."
+            );
+
+        }
+
+        const news =
+            await response.json();
+
+        const item =
+            news.find(
+                n => String(n.id) === String(id)
+            );
+
+        if(!item){
+
+            container.innerHTML = `
+                <div class="error">
+                    ❌ الخبر غير موجود.
+                </div>
+            `;
+
+            return;
+        }
+
+        let date = "";
+
+        if(item.created_at){
+
+            date =
+                new Date(
+                    item.created_at
+                ).toLocaleString(
+                    "ar-SY"
+                );
+        }
+
+        let imageHTML = "";
+
+        if(item.image){
+
+            imageHTML = `
+                <img
+                    src="${item.image}"
+                    alt="صورة الخبر"
+                >
+            `;
+        }
+
+        let videoHTML = "";
+
+        if(item.video){
+
+            videoHTML = `
+                <video controls>
+                    <source src="${item.video}">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+            `;
+        }
+
+        let audioHTML = "";
+
+        if(item.audio){
+
+            audioHTML = `
+                <audio controls>
+                    <source src="${item.audio}">
+                    متصفحك لا يدعم تشغيل الصوت.
+                </audio>
+            `;
+        }
+
+        container.innerHTML = `
+
+            <article class="article">
+
+                <div class="category">
+                    ${item.category || "سوريا"}
+                </div>
+
+                <h2>
+                    ${item.title || ""}
+                </h2>
+
+                <div class="meta">
+                    ${item.location ? "📍 " + item.location : ""}
+                    ${item.source ? " | ✍️ " + item.source : ""}
+                    ${date ? " | 🕐 " + date : ""}
+                </div>
+
+                ${imageHTML}
+
+                <div class="content">
+                    ${item.content || ""}
+                </div>
+
+                ${videoHTML}
+
+                ${audioHTML}
+
+            </article>
+
+        `;
+
+        document.title =
+            (item.title || "الخبر") +
+            " - شبكة سوريا نيوز";
+
+    }catch(error){
+
+        container.innerHTML = `
+            <div class="error">
+                ❌ حدث خطأ أثناء تحميل الخبر.
+                <br><br>
+                ${error.message}
+            </div>
+        `;
+    }
+}
+
+loadArticle();
+
+</script>
+
+</body>
+</html>
