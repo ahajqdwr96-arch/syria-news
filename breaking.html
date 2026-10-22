@@ -238,7 +238,20 @@ img.syrian-flag {
 }
 </style>
 
-</head>
+<!-- Fix breaking brand colors -->\n
+<style>
+header .brand,
+header .brand strong,
+header .logo + strong,
+footer strong {
+  color: #ffffff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+</style>
+\n</head>
 <body>
 <div class="topline"></div>
 <header>
