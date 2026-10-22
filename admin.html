@@ -156,6 +156,10 @@ button:disabled{
     <option value="دولي">🌍 دولي</option>
     <option value="محلي">📍 محلي</option>
 </select>
+<label style="display:flex;align-items:center;gap:10px;margin:15px 0;">
+  <input type="checkbox" id="isBreaking" style="width:20px;height:20px;">
+  🔴 نشر كخبر عاجل لمدة 24 ساعة
+</label>
 
 <label>📍 المكان</label>
 <input
@@ -559,6 +563,7 @@ async function publishNews(){
             "category"
         ).value;
 
+    const isBreaking = document.getElementById("isBreaking").checked;
     const location =
         document.getElementById(
             "location"
@@ -700,6 +705,7 @@ async function publishNews(){
             audio:
                 audio,
 
+            is_breaking: isBreaking,
             created_at:
                 new Date().toISOString()
 
