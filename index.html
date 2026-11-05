@@ -962,84 +962,300 @@ footer a {color:#e2e5e9!important}
 }
 </style>
 
+
+<style id="snn-global-newsroom">
+:root {
+  --snn-bg:#090b0f;
+  --snn-panel:#12161d;
+  --snn-card:#171c24;
+  --snn-line:#2a303a;
+  --snn-text:#f0f2f5;
+  --snn-muted:#9ba4b1;
+  --snn-red:#a51f2b;
+  --snn-red-light:#d33b49;
+  --snn-silver:#cbd0d8;
+}
+html {scroll-behavior:smooth;background:var(--snn-bg)}
+body {
+  margin:0!important;background:var(--snn-bg)!important;
+  color:var(--snn-text)!important;font-family:Tahoma,Arial,sans-serif;
+}
+.snn-header {
+  position:relative;overflow:hidden;text-align:center;
+  padding:34px 16px 27px!important;min-height:0!important;
+  background:
+    radial-gradient(ellipse at 50% -15%,#424955 0%,transparent 62%),
+    linear-gradient(145deg,#090b0f,#191e27 58%,#0a0c10)!important;
+  border-bottom:1px solid #353c47!important;
+}
+.snn-header:after {
+  content:"";position:absolute;bottom:0;left:8%;right:8%;height:1px;
+  background:linear-gradient(90deg,transparent,#a51f2b,transparent);
+}
+.snn-identity {
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:7px;width:100%;
+}
+.snn-stars {direction:ltr;color:#d5d9df;font-size:24px;letter-spacing:6px}
+.snn-stars span {color:#fff}
+.snn-identity h1 {
+  margin:0!important;color:#fff!important;font-size:clamp(29px,5vw,45px)!important;
+  font-weight:900!important;letter-spacing:0!important;line-height:1.4!important;
+}
+.snn-english {direction:ltr;color:#aeb6c1;font-size:10px;font-weight:800;letter-spacing:3px}
+.snn-identity p {margin:3px 0 0!important;color:#d34b57!important;font-size:15px!important;font-weight:800}
+.snn-nav {
+  display:flex;justify-content:center;align-items:center;gap:7px;
+  padding:11px 14px;background:#10141a;border-bottom:1px solid var(--snn-line);
+  overflow-x:auto;white-space:nowrap;
+}
+.snn-nav a {
+  color:#c5cbd4;text-decoration:none;padding:10px 17px;
+  border:1px solid transparent;border-radius:3px;font-size:13px;font-weight:700;
+}
+.snn-nav a:hover,.snn-nav a:first-child {
+  color:#fff;background:#202630;border-color:#3b444f;
+}
+.snn-nav a.snn-breaking-link {color:#ff8a93}
+.snn-wrap {width:min(1240px,100%);margin:auto;padding:24px 20px 45px}
+.snn-intro {
+  display:grid;grid-template-columns:1.4fr .6fr;gap:18px;margin:4px 0 22px;
+}
+.snn-intro-main,.snn-intro-side {
+  background:linear-gradient(130deg,#1b2029,#11151b);
+  border:1px solid #303743;border-radius:5px;padding:25px;
+}
+.snn-kicker {
+  display:flex;align-items:center;gap:9px;color:#aeb6c1;
+  font-size:11px;font-weight:800;letter-spacing:2px;
+}
+.snn-live-dot {
+  width:8px;height:8px;background:#d33b49;border-radius:50%;
+  box-shadow:0 0 12px #d33b49;display:inline-block;
+}
+.snn-intro h2 {
+  margin:15px 0 9px;color:#fff;font-size:clamp(23px,3.2vw,35px);
+  line-height:1.55;font-weight:900;
+}
+.snn-intro-main p {color:#aab2bd;line-height:2;margin:0;font-size:14px}
+.snn-intro-side {display:flex;flex-direction:column;justify-content:center;gap:12px}
+.snn-side-label {font-size:11px;color:#9da6b2;font-weight:800;letter-spacing:1.5px}
+.snn-side-title {font-size:20px;color:#f1f3f6;font-weight:900;line-height:1.7}
+.snn-side-rule {height:3px;width:52px;background:var(--snn-red)}
+.snn-breaking {
+  display:flex;align-items:center;gap:13px;margin:0 0 25px;padding:14px 17px;
+  background:linear-gradient(100deg,#351116,#171216);
+  border:1px solid #682832;border-right:4px solid var(--snn-red);border-radius:4px;
+  color:#f2dfe1;font-size:14px;line-height:1.8;
+}
+.snn-breaking strong {
+  flex:none;color:#fff;background:var(--snn-red);
+  padding:5px 10px;border-radius:2px;font-size:11px;
+}
+.snn-tools {
+  background:#12161d;border:1px solid var(--snn-line);border-radius:5px;
+  padding:19px;margin:0 0 23px;
+}
+.snn-tools-head {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.snn-tools-head h2 {margin:0;color:#f1f3f6;font-size:17px}
+.snn-tools-head span {color:#8993a0;font-size:11px}
+.search-label {display:block;color:#cbd1d9;font-size:12px;font-weight:700;margin-bottom:8px}
+#newsSearch {
+  width:100%;padding:14px 15px;background:#090c11!important;
+  color:#fff!important;border:1px solid #343c48!important;border-radius:3px;
+  outline:none;font:inherit;font-size:14px;
+}
+#newsSearch:focus {border-color:#9da6b2!important;box-shadow:0 0 0 2px #aeb7c21a}
+#newsSearch::placeholder {color:#77818e}
+.category-filters {display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.category-filters .filter-btn {
+  background:#202630;color:#c6ccd5;border:1px solid #39424e;
+  padding:9px 14px;border-radius:3px;font:inherit;font-size:12px;cursor:pointer;
+}
+.category-filters .filter-btn.active {
+  background:#303945;color:#fff;border-color:#aeb6c1;
+}
+#searchStatus {color:#9da7b3!important;font-size:12px;margin:13px 0 0}
+.snn-section-head {
+  display:flex;align-items:end;justify-content:space-between;gap:12px;
+  border-bottom:1px solid #343b46;padding-bottom:13px;margin:0 0 17px;
+}
+.snn-section-head h2 {margin:0;color:#f4f5f7;font-size:23px;font-weight:900}
+.snn-section-head p {margin:0;color:#929ba7;font-size:11px}
+#newsContainer {
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:17px!important;
+}
+#newsContainer .card {
+  min-width:0;display:flex;flex-direction:column;
+  background:linear-gradient(145deg,#1b2028,#11151b)!important;
+  color:#cbd0d8!important;border:1px solid #303844!important;
+  border-top:2px solid #626c79!important;border-radius:4px!important;
+  padding:17px!important;margin:0!important;box-shadow:0 8px 24px #0003!important;
+}
+#newsContainer .card:first-child {
+  grid-column:1/-1;border-top:3px solid var(--snn-red)!important;
+  display:grid;grid-template-columns:1.1fr .9fr;column-gap:22px;
+  align-content:start;padding:22px!important;
+  background:linear-gradient(115deg,#202630,#11151b)!important;
+}
+#newsContainer .card h2 {
+  color:#f4f5f7!important;font-size:18px!important;line-height:1.8!important;
+  margin:12px 0!important;
+}
+#newsContainer .card:first-child h2 {font-size:clamp(22px,3vw,31px)!important}
+#newsContainer .card img {
+  width:100%!important;height:190px;object-fit:cover;
+  border:1px solid #3c444f;border-radius:3px;margin:10px 0 14px;
+}
+#newsContainer .card:first-child img {
+  grid-column:2;grid-row:1/5;height:270px;margin:0;align-self:center;
+}
+#newsContainer .category {
+  width:max-content;background:#292f38!important;color:#e5e8ec!important;
+  border:1px solid #4a535f!important;border-radius:2px!important;
+  padding:5px 9px;font-size:11px;
+}
+#newsContainer .news-excerpt {color:#adb5bf!important;line-height:2!important;font-size:13px}
+#newsContainer .read-more {
+  display:inline-block;width:max-content;margin-top:auto;
+  background:#303741!important;color:#fff!important;border:1px solid #69727e!important;
+  border-radius:3px!important;padding:10px 15px!important;text-decoration:none;
+  font-size:12px;font-weight:700;
+}
+#newsContainer .read-more:hover {background:#a51f2b!important;border-color:#a51f2b!important}
+#newsContainer .card>p:not(.news-excerpt) {color:#929ba6!important;font-size:11px}
+#newsContainer video,#newsContainer audio {max-width:100%;margin:10px 0}
+.snn-stats {
+  display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 0;
+}
+.snn-stat {
+  display:flex;align-items:center;gap:9px;padding:10px 13px;
+  background:#12161d;border:1px solid #2b323d;border-radius:3px;
+  color:#aeb6c1;font-size:12px;
+}
+.snn-stat strong {color:#fff;font-size:14px}
+.snn-stat button {
+  border:1px solid #535e6b;background:#242b35;color:#fff;
+  padding:6px 10px;border-radius:3px;font:inherit;cursor:pointer;
+}
+.snn-stat button:disabled {opacity:.6}
+.snn-footer {
+  text-align:center;padding:25px 15px;background:#0d1015;
+  border-top:1px solid #343b46;color:#929ba7;font-size:12px;
+}
+.snn-footer p {margin:7px}
+.snn-footer a {color:#e1e5eb;text-decoration:none}
+@media(max-width:850px) {
+  .snn-intro {grid-template-columns:1fr}
+  #newsContainer {grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:600px) {
+  .snn-header {padding:25px 10px 22px!important}
+  .snn-stars {font-size:21px}
+  .snn-identity h1 {font-size:29px!important}
+  .snn-english {font-size:9px;letter-spacing:2px}
+  .snn-nav {justify-content:flex-start;padding:8px 9px}
+  .snn-nav a {flex:0 0 auto;padding:9px 12px;font-size:12px}
+  .snn-wrap {padding:16px 11px 30px}
+  .snn-intro-main,.snn-intro-side {padding:18px}
+  .snn-intro h2 {font-size:24px}
+  .snn-breaking {font-size:12px;padding:11px;align-items:flex-start}
+  .snn-tools {padding:14px}
+  .snn-tools-head {align-items:flex-start;flex-direction:column}
+  .snn-section-head h2 {font-size:20px}
+  .snn-section-head p {display:none}
+  #newsContainer {grid-template-columns:1fr!important;gap:13px!important}
+  #newsContainer .card:first-child {
+    grid-column:1;display:flex;padding:16px!important;
+  }
+  #newsContainer .card:first-child img {height:220px;order:3;margin:8px 0}
+  #newsContainer .card h2 {font-size:18px!important}
+  .snn-stats {gap:7px}
+  .snn-stat {font-size:11px;padding:9px}
+}
+</style>
+
 </head>
 
 <body>
-
 <header class="snn-header">
-<div class="snn-identity">
-  <div class="snn-stars" aria-label="ثلاث نجوم">★ <span>★</span> ★</div>
-  <h1>شبكة سوريا نيوز</h1>
-  <div class="snn-english">SYRIA NEWS NETWORK</div>
-  <p>صوت الحق والواقع</p>
-</div>
+  <div class="snn-identity">
+    <div class="snn-stars" aria-label="ثلاث نجوم">★ <span>★</span> ★</div>
+    <h1>شبكة سوريا نيوز</h1>
+    <div class="snn-english">SYRIA NEWS NETWORK</div>
+    <p>صوت الحق والواقع</p>
+  </div>
 </header>
 
-<nav>
-    <a href="index.html">الرئيسية</a>
-    <a href="#news">آخر الأخبار</a>
-    <a href="breaking.html">🔴 الأخبار العاجلة</a>
+<nav class="snn-nav" aria-label="القائمة الرئيسية">
+  <a href="index.html">الرئيسية</a>
+  <a href="#news">مركز الأخبار</a>
+  <a class="snn-breaking-link" href="breaking.html">🔴 الأخبار العاجلة</a>
+  <a href="news.html">التغطيات</a>
+  <a href="https://t.me/suryainternetniuz" target="_blank" rel="noopener">تلغرام</a>
 </nav>
 
-<section class="news-tools" aria-label="البحث وأقسام الأخبار">
+<main class="snn-wrap" id="snn-global-newsroom">
+  <section class="snn-intro">
+    <div class="snn-intro-main">
+      <div class="snn-kicker"><span class="snn-live-dot"></span> SYRIA NEWS NETWORK · NEWSROOM</div>
+      <h2>المشهد كما هو.<br>والخبر من مصدره.</h2>
+      <p>منصة إخبارية لمتابعة آخر التطورات والأحداث، وتقديم الأخبار والتغطيات بوضوح وموضوعية.</p>
+    </div>
+    <aside class="snn-intro-side">
+      <div class="snn-side-label">SNN / THE NEWS DESK</div>
+      <div class="snn-side-title">مركز متابعة الأخبار والتطورات</div>
+      <div class="snn-side-rule"></div>
+      <div class="snn-side-label">صوت الحق والواقع</div>
+    </aside>
+  </section>
+
+  <section class="snn-breaking" aria-label="تنويه">
+    <strong>متابعة مستمرة</strong>
+    <span>شبكة سوريا نيوز تتابع آخر الأخبار والتطورات، ويتم تحديث المحتوى فور نشر المواد الجديدة.</span>
+  </section>
+
+  <section class="snn-tools" aria-label="البحث وأقسام الأخبار">
+    <div class="snn-tools-head">
+      <h2>ابحث وتابع</h2>
+      <span>SEARCH · CATEGORIES</span>
+    </div>
     <label class="search-label" for="newsSearch">ابحث في أخبار الشبكة</label>
     <input id="newsSearch" type="search"
-           placeholder="اكتب عنوان الخبر أو كلمة منه..."
-           autocomplete="off">
+      placeholder="اكتب عنوان الخبر أو كلمة منه..."
+      autocomplete="off">
     <div class="category-filters" id="categoryFilters">
-        <button type="button" class="filter-btn active" data-category="all">كل الأخبار</button>
+      <button type="button" class="filter-btn active" data-category="all">كل الأخبار</button>
     </div>
     <p id="searchStatus" aria-live="polite">آخر الأخبار المنشورة</p>
-</section>
+  </section>
 
-
-<div class="container">
-
-    <div class="stats">
-
-        <div class="stat">
-            <span class="stat-number" id="visitorCount">0</span>
-            <div class="stat-title">👁️ الزيارات</div>
-        </div>
-
-        <div class="stat">
-            <span class="stat-number" id="likeCount">0</span>
-            <div class="stat-title">❤️ الإعجابات</div>
-
-            <button
-                class="like-button"
-                id="likeButton"
-                onclick="addLike()"
-            >
-                ❤️ إعجاب
-            </button>
-        </div>
-
+  <section id="news">
+    <div class="snn-section-head">
+      <h2>آخر الأخبار</h2>
+      <p>LATEST REPORTS / SNN</p>
     </div>
-
-    <div class="breaking">
-        📰 شبكة سوريا نيوز — آخر الأخبار والتطورات في سوريا.
+    <div id="newsContainer">
+      <div class="card">
+        <h2>جاري تحميل الأخبار</h2>
+        <p>يرجى الانتظار...</p>
+      </div>
     </div>
+  </section>
 
-    <div id="news">
-        <div id="newsContainer">
-            <div class="card">
-                <h2>📰 آخر الأخبار</h2>
-                <p>جاري تحميل الأخبار...</p>
-            </div>
-        </div>
+  <section class="snn-stats" aria-label="إحصائيات الموقع">
+    <div class="snn-stat">👁️ الزيارات <strong id="visitorCount">0</strong></div>
+    <div class="snn-stat">❤️ الإعجابات <strong id="likeCount">0</strong>
+      <button class="like-button" id="likeButton" onclick="addLike()">❤️ إعجاب</button>
     </div>
+  </section>
+</main>
 
-</div>
-
-<footer>
-    <p>شبكة سوريا نيوز </p>
-
-    <p>
-        <a href="https://t.me/suryainternetniuz" target="_blank">
-            قناة التلغرام
-        </a>
-    </p>
+<footer class="snn-footer">
+  <p>شبكة سوريا نيوز 🇸🇾</p>
+  <p>صوت الحق والواقع</p>
+  <p><a href="https://t.me/suryainternetniuz" target="_blank" rel="noopener">قناة التلغرام</a></p>
 </footer>
 
 <script>
