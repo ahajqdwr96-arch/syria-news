@@ -29,6 +29,32 @@ on:
         required: false
         type: string
 
+      video:
+        description: "رابط فيديو الخبر"
+        required: false
+        type: string
+
+      audio:
+        description: "رابط صوت الخبر"
+        required: false
+        type: string
+
+      location:
+        description: "موقع الخبر"
+        required: false
+        type: string
+
+      source:
+        description: "مصدر الخبر"
+        required: false
+        type: string
+
+      is_breaking:
+        description: "هل الخبر عاجل؟"
+        required: true
+        default: false
+        type: boolean
+
 permissions:
   contents: write
 
@@ -37,7 +63,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: تحميل الموقع
         uses: actions/checkout@v4
 
@@ -47,39 +72,76 @@ jobs:
           CATEGORY: ${{ inputs.category }}
           CONTENT: ${{ inputs.content }}
           IMAGE: ${{ inputs.image }}
+          VIDEO: ${{ inputs.video }}
+          AUDIO: ${{ inputs.audio }}
+          LOCATION: ${{ inputs.location }}
+          SOURCE: ${{ inputs.source }}
+          IS_BREAKING: ${{ inputs.is_breaking }}
 
         run: |
           python3 - <<'PY'
           import json
           import os
+          import time
           from datetime import datetime, timezone
 
           path = "news.json"
 
           if os.path.exists(path):
-              try:
-                  with open(path, "r", encoding="utf-8") as f:
-                      news = json.load(f)
-              except:
-                  news = []
+              with open(path, "r", encoding="utf-8") as f:
+                  news = json.load(f)
           else:
               news = []
 
+          if not isinstance(news, list):
+              raise ValueError("ملف news.json ليس قائمة أخبار صحيحة")
+
+          title = os.environ.get("TITLE", "").strip()
+          content = os.environ.get("CONTENT", "").strip()
+
+          if not title or not content:
+              raise ValueError("عنوان الخبر ونصه مطلوبان")
+
+          now = datetime.now(timezone.utc)
+
           article = {
-              "title": os.environ.get("TITLE", ""),
-              "category": os.environ.get("CATEGORY", ""),
-              "content": os.environ.get("CONTENT", ""),
-              "image": os.environ.get("IMAGE", ""),
-              "date": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+              "id": int(time.time() * 1000),
+              "title": title,
+              "content": content,
+              "category": os.environ.get("CATEGORY", "").strip(),
+              "location": os.environ.get("LOCATION", "").strip(),
+              "source": os.environ.get("SOURCE", "").strip(),
+              "image": os.environ.get("IMAGE", "").strip(),
+              "video": os.environ.get("VIDEO", "").strip(),
+              "audio": os.environ.get("AUDIO", "").strip(),
+              "is_breaking": os.environ.get("IS_BREAKING", "false").lower() == "true",
+              "created_at": now.isoformat(timespec="seconds").replace("+00:00", "Z"),
+              "date": now.strftime("%Y-%m-%d %H:%M")
           }
 
           news.insert(0, article)
 
           with open(path, "w", encoding="utf-8") as f:
               json.dump(news, f, ensure_ascii=False, indent=2)
+              f.write("\n")
 
           print("تم إنشاء الخبر بنجاح")
+          print("رقم الخبر:", article["id"])
+          print("التصنيف:", article["category"])
+          print("عاجل:", article["is_breaking"])
           PY
 
       - name: رفع الخبر إلى GitHub
-        run
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add news.json
+
+          if git diff --cached --quiet; then
+            echo "لا توجد تغييرات للنشر"
+            exit 0
+          fi
+
+          git commit -m "نشر خبر جديد"
+          git push
