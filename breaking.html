@@ -251,18 +251,138 @@ footer strong {
   text-shadow: none !important;
 }
 </style>
+
+<style id="syria-breaking-dark-v2">
+:root {
+  --bg:#08090b;
+  --panel:#14171c;
+  --panel2:#1c2027;
+  --red:#a51f2b;
+  --red2:#c52b38;
+  --text:#f3f4f6;
+  --muted:#a5aab3;
+  --border:#30343c;
+}
+body {background:#08090b!important;color:#f3f4f6!important}
+header {background:linear-gradient(120deg,#08090b,#20242b 65%,#101216)!important;border-color:#383c44!important}
+.brand h1 {color:#f0f1f3!important}
+.brand p {color:#aeb3bc!important}
+.logo {background:#a51f2b!important;color:#fff!important}
+nav a {background:#171a20!important;color:#e4e6e9!important;border-color:#383c44!important}
+nav a:hover,nav a.active {background:#a51f2b!important;border-color:#c52b38!important;color:#fff!important}
+.ticker {background:#190d11!important;border-color:#6d202a!important}
+.ticker-text {color:#e2e4e8!important}
+.hero {background:linear-gradient(120deg,#191c22,#101216 75%)!important;border-color:#555b65!important;color:#fff!important}
+.hero h2 {color:#f5f5f6!important}
+.hero p,.updated {color:#aeb4be!important}
+.eyebrow {color:#ed6570!important}
+.stat,.tools,.card,.empty,.error,.loading {background:#14171c!important;border-color:#30343c!important;color:#f3f4f6!important}
+.stat-label,.results-count,.meta,.category,.expiry {color:#aeb4be!important}
+.stat-value {color:#e3e5e8!important}
+.stat-value.red {color:#ff6570!important}
+.search input {background:#090b0f!important;color:#fff!important;border-color:#3b414b!important}
+.filter {background:#20242b!important;color:#e5e7eb!important;border-color:#3b414b!important}
+.filter.active {background:#a51f2b!important;border-color:#c52b38!important;color:#fff!important}
+.card {box-shadow:0 8px 25px #0005}
+.card:hover {border-color:#a51f2b!important}
+.card h3 {color:#f4f5f6!important}
+.content {color:#d9dce1!important;white-space:pre-wrap;overflow-wrap:anywhere;line-height:2.1}
+.badge-red {background:#35151b!important;color:#ff8991!important;border-color:#762832!important}
+.news-image {max-height:390px;object-fit:contain;background:#090b0f}
+.extra a {color:#e4e6e9!important;border-color:#454b55!important}
+.extra a.article-link {background:#a51f2b!important;border-color:#a51f2b!important;color:#fff!important;font-weight:bold}
+.expiry {border-color:#30343c!important}
+footer {background:#0c0e12!important;border-color:#343943!important;color:#aeb4be!important}
+footer strong {color:#e5e7eb!important}
+@media(max-width:680px) {
+  .hero {border-radius:13px}
+  .card {border-radius:12px}
+  .news-image {max-height:280px}
+}
+</style>
+
+
+<style id="snn-stars-identity">
+.snn-header {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(213,215,219,.10), transparent 65%),
+    linear-gradient(145deg,#08090b 0%,#171a20 55%,#090a0d 100%) !important;
+  border-bottom: 1px solid #343943 !important;
+  padding: 30px 14px 27px !important;
+  min-height: 0 !important;
+  text-align: center !important;
+  position: relative;
+}
+.snn-header .snn-identity {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-align: center;
+}
+.snn-stars {
+  color: #d5d7db;
+  font-size: 23px;
+  line-height: 1.2;
+  letter-spacing: 5px;
+  text-shadow: 0 0 13px rgba(213,215,219,.22);
+  direction: ltr;
+}
+.snn-stars span { color: #fff; }
+.snn-identity h1 {
+  color: #f1f2f4 !important;
+  font-size: clamp(27px,5vw,43px) !important;
+  font-weight: 900 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  letter-spacing: 0 !important;
+}
+.snn-english {
+  color: #aeb4be;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  direction: ltr;
+}
+.snn-identity p {
+  color: #a51f2b !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  margin: 2px 0 0 !important;
+}
+.snn-header .head-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.snn-header .brand {
+  display: block !important;
+  width: 100%;
+}
+@media(max-width:600px) {
+  .snn-header { padding: 24px 10px 21px !important; }
+  .snn-stars { font-size: 21px; }
+  .snn-identity h1 { font-size: 29px !important; }
+  .snn-english { font-size: 9px; letter-spacing: 2px; }
+}
+</style>
+
 </head>
 <body>
 <div class="topline"></div>
-<header>
+<header class="snn-header">
   <div class="head-inner">
     <div class="brand">
-      
-      <div>
-        <h1>شبكة سوريا نيوز</h1>
-        <p>صوت الحق والواقع · تغطية إخبارية متجددة</p>
-      </div>
-    </div>
+<div class="snn-identity">
+  <div class="snn-stars" aria-label="ثلاث نجوم">★ <span>★</span> ★</div>
+  <h1>شبكة سوريا نيوز</h1>
+  <div class="snn-english">SYRIA NEWS NETWORK</div>
+  <p>صوت الحق والواقع</p>
+</div>
+</div>
     <nav>
       <a href="index.html">الرئيسية</a>
       <a class="active" href="breaking.html">🔴 الأخبار العاجلة</a>
@@ -416,6 +536,7 @@ function renderCard(item) {
         </div>
         <div class="content">${content}</div>
         <div class="extra">
+          ${item.id ? `<a class="article-link" href="article.html?id=${encodeURIComponent(item.id)}">قراءة الخبر كاملاً ←</a>` : ""}
           ${source ? `<a href="#" onclick="return false">${source}</a>` : ""}
           ${video ? `<a href="${escapeHTML(video)}" target="_blank" rel="noopener">▶ مشاهدة الفيديو</a>` : ""}
           ${audio ? `<a href="${escapeHTML(audio)}" target="_blank" rel="noopener">♫ الاستماع للتسجيل</a>` : ""}

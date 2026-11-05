@@ -2,208 +2,438 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>الأخبار | شبكة سوريا نيوز </title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08090b">
+<title>الأخبار | شبكة سوريا نيوز</title>
 <style>
-*{
-    box-sizing:border-box;
+:root{
+  --bg:#08090b;
+  --panel:#111318;
+  --panel2:#171a20;
+  --line:#292d35;
+  --silver:#dfe2e7;
+  --muted:#9299a5;
+  --red:#b51f2b;
+  --white:#fff;
 }
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    margin:0;
-    background:#f3f4f6;
-    font-family:Arial,sans-serif;
-    color:#111827;
+  margin:0;background:var(--bg);color:var(--silver);
+  font-family:Arial,"Tahoma",sans-serif;line-height:1.7;
 }
-
-header{
-    background:#111827;
-    color:white;
-    padding:20px;
-    text-align:center;
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.topline{height:4px;background:linear-gradient(90deg,#71121b,var(--red),#e0e2e6)}
+.shell{width:min(1320px,94%);margin:auto}
+.masthead{
+  background:#0c0e12;border-bottom:1px solid var(--line);
 }
-
-header h1{
-    margin:0;
-    font-size:25px;
+.masthead-inner{
+  min-height:112px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;padding:20px 0;
 }
-
-header p{
-    margin:8px 0 0;
-    color:#d1d5db;
+.brand{display:flex;align-items:center;gap:17px}
+.brand-mark{
+  width:65px;height:65px;border:1px solid #626873;
+  display:grid;place-items:center;border-radius:14px;
+  color:#e4e6e9;font-size:27px;font-weight:900;
+  background:linear-gradient(145deg,#252932,#0b0d11);
+  box-shadow:inset 0 0 20px #ffffff08;
 }
-
-nav{
-    background:#1f2937;
-    text-align:center;
-    padding:12px;
+.brand-name{font-size:27px;font-weight:900;letter-spacing:-1px;color:#f5f6f8}
+.brand-name span{color:#aeb4be}
+.brand-tag{font-size:12px;color:var(--muted);letter-spacing:2px}
+.edition{text-align:left;color:var(--muted);font-size:12px}
+.edition strong{display:block;color:#dce0e5;font-size:14px}
+.navbar{background:#12151b;border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:5px;overflow-x:auto}
+.nav-inner a{
+  white-space:nowrap;padding:15px 17px;color:#bfc4cc;
+  font-size:14px;font-weight:bold;border-bottom:2px solid transparent;
 }
-
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 10px;
-    font-weight:bold;
+.nav-inner a:hover,.nav-inner a.active{
+  color:white;border-color:var(--red);background:#ffffff06;
 }
-
-.container{
-    max-width:1000px;
-    margin:25px auto;
-    padding:0 15px;
+.breaking-bar{
+  background:#190d10;border-bottom:1px solid #572028;
 }
-
-.title{
-    background:white;
-    padding:18px;
-    border-radius:10px;
-    margin-bottom:20px;
-    box-shadow:0 2px 8px #0001;
+.breaking-inner{display:flex;align-items:center;min-height:47px;gap:15px}
+.breaking-label{
+  background:var(--red);color:white;padding:5px 13px;
+  font-size:12px;font-weight:900;white-space:nowrap;
 }
-
-.title h2{
-    margin:0;
+.breaking-text{font-size:13px;color:#e8cfd1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.page-intro{
+  display:flex;justify-content:space-between;align-items:end;
+  padding:34px 0 22px;border-bottom:1px solid var(--line);gap:15px;
 }
-
+.kicker{font-size:11px;color:#aeb4be;letter-spacing:3px;font-weight:bold}
+.page-intro h1{font-size:32px;line-height:1.2;margin:5px 0;color:white}
+.page-intro p{margin:8px 0 0;color:var(--muted);font-size:14px}
+.live-mark{font-size:12px;color:#e2e4e8;white-space:nowrap}
+.live-mark i{display:inline-block;width:8px;height:8px;background:#d52d3b;border-radius:50%;margin-left:7px;box-shadow:0 0 12px #d52d3b}
+.lead-layout{
+  display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,.8fr);
+  gap:18px;margin:25px 0 35px;
+}
+.hero{
+  min-height:440px;position:relative;overflow:hidden;
+  background:#171a20;border:1px solid var(--line);
+}
+.hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(0deg,#050609 0%,#050609e8 22%,#05060935 75%,#05060920)}
+.hero-content{position:absolute;inset:auto 0 0;padding:32px;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:12px;font-weight:bold}
+.eyebrow b{background:var(--red);padding:4px 10px}
+.hero h2{font-size:clamp(24px,3.3vw,39px);line-height:1.45;margin:15px 0 12px;color:#fff;max-width:850px}
+.hero p{color:#c2c5cc;font-size:14px;max-width:700px;margin:0}
+.hero-link{display:inline-block;margin-top:20px;padding:10px 17px;border:1px solid #aeb4be;color:white;font-size:13px;font-weight:bold}
+.hero-link:hover{background:white;color:#111}
+.side-panel{background:var(--panel);border:1px solid var(--line);min-width:0}
+.section-heading{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 17px;border-bottom:1px solid var(--line);
+}
+.section-heading h2{font-size:16px;margin:0;color:white}
+.section-heading span{font-size:11px;color:var(--muted)}
+.side-news{padding:0 17px}
+.side-item{display:grid;grid-template-columns:35px 1fr;gap:12px;padding:17px 0;border-bottom:1px solid #292d354f}
+.side-item:last-child{border:0}
+.side-number{font-size:23px;font-weight:900;color:#555c68;line-height:1.3}
+.side-item a{font-size:14px;font-weight:bold;line-height:1.6;color:#e4e6e9}
+.side-item a:hover{color:white}
+.side-meta{font-size:11px;color:var(--muted);margin-top:5px}
+.toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:15px;margin:30px 0 17px;flex-wrap:wrap;
+}
+.toolbar-title{display:flex;align-items:center;gap:12px}
+.toolbar-title:before{content:"";width:4px;height:27px;background:var(--red)}
+.toolbar-title h2{margin:0;font-size:22px;color:white}
+.count{font-size:12px;color:var(--muted)}
+.search-box{
+  width:min(340px,100%);display:flex;align-items:center;
+  background:var(--panel);border:1px solid var(--line);padding:0 13px;
+}
+.search-box input{
+  width:100%;background:transparent;border:0;outline:0;
+  color:white;padding:12px 5px;font-size:13px;
+}
+.search-box input::placeholder{color:#737b88}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:4px 0 16px}
+.filter-btn{
+  background:#15181e;border:1px solid var(--line);color:#aeb4be;
+  padding:8px 16px;white-space:nowrap;font-size:12px;
+}
+.filter-btn.active,.filter-btn:hover{background:#dfe2e7;color:#101216;border-color:#dfe2e7}
+.news-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+}
 .news-card{
-    background:white;
-    border-radius:10px;
-    padding:18px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px #0001;
+  background:var(--panel);border:1px solid var(--line);
+  min-width:0;transition:.2s;overflow:hidden;
 }
-
-.news-card h3{
-    margin-top:0;
-    font-size:21px;
+.news-card:hover{border-color:#737b88;transform:translateY(-3px)}
+.card-image{height:190px;background:#20242b;overflow:hidden;position:relative}
+.card-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.news-card:hover .card-image img{transform:scale(1.035)}
+.no-image{height:100%;display:grid;place-items:center;color:#666e7b;font-size:13px}
+.card-body{padding:17px}
+.card-category{font-size:11px;color:#d5d8de;font-weight:bold}
+.card-category:before{content:"";display:inline-block;width:6px;height:6px;background:var(--red);margin-left:7px}
+.card-body h3{font-size:17px;line-height:1.6;color:#f0f1f3;margin:9px 0}
+.card-excerpt{font-size:12px;color:var(--muted);line-height:1.8;margin:0 0 15px}
+.card-bottom{
+  border-top:1px solid var(--line);padding-top:12px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
 }
-
-.category{
-    color:#b91c1c;
-    font-weight:bold;
-    margin-bottom:8px;
+.card-date{font-size:10px;color:#858d99}
+.card-read{font-size:12px;color:#e3e5e9;font-weight:bold}
+.card-read:hover{color:#fff}
+.breaking-badge{font-size:10px;color:#ff9da4;background:#4a1119;padding:3px 7px;margin-right:5px}
+.empty-state{
+  grid-column:1/-1;text-align:center;padding:55px 15px;
+  border:1px solid var(--line);background:var(--panel);color:var(--muted)
 }
-
-.date{
-    color:#6b7280;
-    font-size:14px;
-    margin-bottom:10px;
+.more-wrap{text-align:center;padding:28px 0 45px}
+.more-btn{
+  background:#dfe2e7;color:#101216;border:0;padding:12px 30px;
+  font-weight:900;font-size:13px;
 }
-
-.read{
-    display:inline-block;
-    background:#b91c1c;
-    color:white;
-    padding:9px 15px;
-    border-radius:7px;
-    text-decoration:none;
-    margin-top:10px;
+.more-btn:hover{background:white}
+footer{background:#0d0f13;border-top:1px solid var(--line);margin-top:30px}
+.footer-inner{padding:30px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-brand{font-size:18px;font-weight:900;color:#f1f2f4}
+.footer-inner p{font-size:12px;color:var(--muted);margin:5px 0}
+.footer-links{display:flex;gap:18px;align-items:center;font-size:12px;color:#b6bbc4}
+.footer-links a:hover{color:white}
+@media(max-width:850px){
+ .lead-layout{grid-template-columns:1fr}
+ .hero{min-height:390px}
+ .side-news{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
+ .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-
-footer{
-    margin-top:40px;
-    background:#111827;
-    color:white;
-    text-align:center;
-    padding:25px;
-}
-
-footer a{
-    color:#60a5fa;
-}
-</style>
-
-
-<style>
-.syrian-flag {
-  width: 30px;
-  height: 20px;
-  object-fit: cover;
-  vertical-align: middle;
-  display: inline-block;
-  border-radius: 2px;
-}
-</style>
-
-
-<style>
-img.syrian-flag {
-  display: inline-block !important;
-  width: 30px !important;
-  height: 20px !important;
-  vertical-align: middle !important;
-  object-fit: fill !important;
-  position: static !important;
-  transform: none !important;
+@media(max-width:560px){
+ .shell{width:92%}
+ .masthead-inner{min-height:85px;padding:13px 0}
+ .brand-mark{width:48px;height:48px;font-size:21px}
+ .brand-name{font-size:20px}
+ .brand-tag{font-size:10px;letter-spacing:1px}
+ .edition{font-size:10px}
+ .edition strong{font-size:12px}
+ .nav-inner a{padding:12px 13px;font-size:12px}
+ .page-intro{padding:25px 0 17px}
+ .page-intro h1{font-size:26px}
+ .page-intro p{font-size:12px}
+ .hero{min-height:360px}
+ .hero-content{padding:20px}
+ .hero h2{font-size:24px}
+ .side-news{grid-template-columns:1fr}
+ .news-grid{grid-template-columns:1fr}
+ .card-image{height:210px}
+ .toolbar{align-items:stretch}
+ .search-box{width:100%}
+ .footer-inner{display:block}
+ .footer-links{margin-top:15px;flex-wrap:wrap}
 }
 </style>
-
 </head>
-
 <body>
+<div class="topline"></div>
 
-<header>
-
-<h1> شبكة سوريا نيوز</h1>
-
-<p>صوت الحق والواقع</p>
-
+<header class="masthead">
+ <div class="shell masthead-inner">
+  <a class="brand" href="index.html">
+   <div class="brand-mark">ن</div>
+   <div>
+    <div class="brand-name">شبكة سوريا <span>نيوز</span></div>
+    <div class="brand-tag">صوت الحق والواقع</div>
+   </div>
+  </a>
+  <div class="edition">
+   <strong>المركز الإخباري</strong>
+   تغطية مستمرة · سوريا
+  </div>
+ </div>
 </header>
 
-<nav>
-
-<a href="index.html">الرئيسية</a>
-
-<a href="news.html">الأخبار</a>
-    <a href="breaking.html">🔴 الأخبار العاجلة</a>
-
-<a href="https://t.me/suryainternetniuz" target="_blank">
-قناتنا على تيليجرام
-</a>
-
+<nav class="navbar">
+ <div class="shell nav-inner">
+  <a href="index.html">الرئيسية</a>
+  <a class="active" href="news.html">الأخبار</a>
+  <a href="breaking.html">الأخبار العاجلة</a>
+  <a href="https://t.me/suryainternetniuz" target="_blank" rel="noopener">تيليجرام</a>
+ </div>
 </nav>
 
-<div class="container">
-
-<div class="title">
-
-<h2>📰 آخر الأخبار</h2>
-
-<p>تابع آخر الأخبار والتطورات في سوريا والمنطقة.</p>
-
+<div class="breaking-bar">
+ <div class="shell breaking-inner">
+  <span class="breaking-label">عاجل</span>
+  <div class="breaking-text" id="breakingText">جارٍ تحميل آخر المستجدات...</div>
+ </div>
 </div>
 
+<main class="shell">
+ <section class="page-intro">
+  <div>
+   <div class="kicker">SYRIA NEWS NETWORK</div>
+   <h1>المشهد الإخباري</h1>
+   <p>آخر الأخبار والتطورات من سوريا والمنطقة، لحظة بلحظة.</p>
+  </div>
+  <div class="live-mark"><i></i> تحديث من الأخبار المنشورة</div>
+ </section>
 
-<div class="news-card">
+ <section class="lead-layout">
+  <div class="hero" id="hero">
+   <div class="hero-content">
+    <div class="eyebrow"><b>الخبر الرئيسي</b><span>شبكة سوريا نيوز</span></div>
+    <h2>جارٍ تحميل الأخبار...</h2>
+   </div>
+  </div>
+  <aside class="side-panel">
+   <div class="section-heading"><h2>أبرز المستجدات</h2><span>LATEST</span></div>
+   <div class="side-news" id="sideNews">
+    <div class="side-item">جارٍ تحميل الأخبار...</div>
+   </div>
+  </aside>
+ </section>
 
-<div class="category">سوريا</div>
+ <section>
+  <div class="toolbar">
+   <div class="toolbar-title"><h2>جميع الأخبار</h2><span class="count" id="newsCount"></span></div>
+   <label class="search-box">
+    <input id="newsSearch" type="search" placeholder="ابحث عن خبر أو منطقة..." aria-label="ابحث في الأخبار">
+   </label>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="news-grid" id="newsGrid">
+   <div class="empty-state">جارٍ تحميل الأخبار...</div>
+  </div>
+  <div class="more-wrap"><button class="more-btn" id="moreBtn" hidden>عرض المزيد من الأخبار</button></div>
+ </section>
+</main>
 
-<h3>
-خبر تجريبي — شبكة سوريا نيوز
-</h3>
+<footer>
+ <div class="shell footer-inner">
+  <div>
+   <div class="footer-brand">شبكة سوريا نيوز 🇸🇾</div>
+   <p>صوت الحق والواقع · تغطية مستقلة للأحداث.</p>
+  </div>
+  <div class="footer-links">
+   <a href="index.html">الرئيسية</a>
+   <a href="breaking.html">العاجل</a>
+   <a href="https://t.me/suryainternetniuz" target="_blank" rel="noopener">قناة تيليجرام</a>
+  </div>
+ </div>
+</footer>
 
-<div class="date">
-20 سبتمبر 2026
-</div>
+<script>
+const grid = document.getElementById("newsGrid");
+const filtersBox = document.getElementById("filters");
+const searchInput = document.getElementById("newsSearch");
+const countBox = document.getElementById("newsCount");
+const moreBtn = document.getElementById("moreBtn");
 
-<p>
-هذه مساحة مخصصة لعرض الأخبار الجديدة التي سيتم نشرها على الموقع.
-</p>
+let allNews = [];
+let selectedCategory = "الكل";
+let visibleLimit = 12;
 
-<a class="read" href="#">
-قراءة الخبر
-</a>
-
-</div>
-
-
-<div class="news-card">
-
-<div class="category">حلب</div>
-
-<h3>
-سيتم إضافة الأخبار تباعاً
-</h3>
-
-<div
+function esc(value){
+ return String(value ?? "").replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[ch]));
+}
+function safeUrl(value){
+ try{
+  const url = new URL(value, location.href);
+  return ["http:","https:"].includes(url.protocol) ? esc(url.href) : "";
+ }catch(e){return "";}
+}
+function dateText(value){
+ if(!value) return "";
+ const d = new Date(value);
+ if(Number.isNaN(d.getTime())) return "";
+ return d.toLocaleDateString("ar-SY",{year:"numeric",month:"long",day:"numeric"});
+}
+function excerpt(item){
+ const content = String(item.content || "").replace(/\s+/g," ").trim();
+ return content.length > 155 ? content.slice(0,155).trim()+"…" : content;
+}
+function articleLink(item){
+ return "article.html?id="+encodeURIComponent(item.id);
+}
+function renderHero(){
+ const item = allNews[0];
+ const hero = document.getElementById("hero");
+ if(!item){
+  hero.innerHTML='<div class="hero-content"><h2>لا توجد أخبار منشورة حالياً</h2></div>';
+  return;
+ }
+ const image = safeUrl(item.image);
+ hero.innerHTML = `
+  ${image ? `<img class="hero-image" src="${image}" alt="" onerror="this.remove()">` : ""}
+  <div class="hero-shade"></div>
+  <div class="hero-content">
+   <div class="eyebrow"><b>${item.is_breaking ? "عاجل" : "الخبر الرئيسي"}</b><span>${esc(item.category || "سوريا")}</span></div>
+   <h2>${esc(item.title || "خبر من شبكة سوريا نيوز")}</h2>
+   <p>${esc(excerpt(item))}</p>
+   <a class="hero-link" href="${articleLink(item)}">اقرأ تفاصيل الخبر ←</a>
+  </div>`;
+}
+function renderSide(){
+ const box = document.getElementById("sideNews");
+ const items = allNews.slice(1,6);
+ box.innerHTML = items.length ? items.map((item,i)=>`
+  <div class="side-item">
+   <div class="side-number">${String(i+1).padStart(2,"0")}</div>
+   <div>
+    <a href="${articleLink(item)}">${esc(item.title)}</a>
+    <div class="side-meta">${esc(item.category || "سوريا")} · ${esc(dateText(item.created_at))}</div>
+   </div>
+  </div>`).join("") : '<div class="side-item">لا توجد مستجدات إضافية.</div>';
+}
+function renderBreaking(){
+ const item = allNews.find(n=>n.is_breaking);
+ document.getElementById("breakingText").textContent =
+  item ? item.title : "شبكة سوريا نيوز — صوت الحق والواقع";
+}
+function renderFilters(){
+ const categories = ["الكل",...new Set(allNews.map(n=>(n.category||"سوريا").trim()).filter(Boolean))];
+ filtersBox.innerHTML = categories.map(cat=>`
+  <button class="filter-btn ${cat===selectedCategory?"active":""}" data-category="${esc(cat)}">${esc(cat)}</button>
+ `).join("");
+ filtersBox.querySelectorAll("button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+   selectedCategory = btn.dataset.category;
+   visibleLimit = 12;
+   renderFilters();
+   renderCards();
+  });
+ });
+}
+function getFiltered(){
+ const q = searchInput.value.trim().toLocaleLowerCase("ar");
+ return allNews.filter(item=>{
+  const category = (item.category||"سوريا").trim();
+  const categoryMatch = selectedCategory==="الكل" || category===selectedCategory;
+  const haystack = [item.title,item.content,item.category,item.location,item.source].filter(Boolean).join(" ").toLocaleLowerCase("ar");
+  return categoryMatch && (!q || haystack.includes(q));
+ });
+}
+function renderCards(){
+ const filtered = getFiltered();
+ const shown = filtered.slice(0,visibleLimit);
+ countBox.textContent = `(${filtered.length} خبر)`;
+ if(!shown.length){
+  grid.innerHTML='<div class="empty-state">لا توجد أخبار مطابقة للبحث أو التصنيف المحدد.</div>';
+ }else{
+  grid.innerHTML = shown.map(item=>{
+   const image = safeUrl(item.image);
+   return `
+    <article class="news-card">
+     <a href="${articleLink(item)}" aria-label="${esc(item.title)}">
+      <div class="card-image">
+       ${image ? `<img src="${image}" alt="${esc(item.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=&quot;no-image&quot;>شبكة سوريا نيوز</div>'">` : '<div class="no-image">شبكة سوريا نيوز</div>'}
+      </div>
+     </a>
+     <div class="card-body">
+      <div class="card-category">${esc(item.category || "سوريا")}${item.is_breaking ? '<span class="breaking-badge">عاجل</span>' : ""}</div>
+      <h3><a href="${articleLink(item)}">${esc(item.title || "")}</a></h3>
+      <p class="card-excerpt">${esc(excerpt(item))}</p>
+      <div class="card-bottom">
+       <span class="card-date">${esc(dateText(item.created_at))}</span>
+       <a class="card-read" href="${articleLink(item)}">التفاصيل ←</a>
+      </div>
+     </div>
+    </article>`;
+  }).join("");
+ }
+ moreBtn.hidden = filtered.length <= visibleLimit;
+}
+async function loadNews(){
+ try{
+  const response = await fetch("news.json?time="+Date.now(),{cache:"no-store"});
+  if(!response.ok) throw new Error("تعذر تحميل ملف الأخبار");
+  const data = await response.json();
+  allNews = Array.isArray(data) ? data.slice() : [];
+  allNews.sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+  renderHero();
+  renderSide();
+  renderBreaking();
+  renderFilters();
+  renderCards();
+ }catch(error){
+  grid.innerHTML='<div class="empty-state">تعذّر تحميل الأخبار حالياً. حاول تحديث الصفحة بعد قليل.</div>';
+  document.getElementById("hero").innerHTML='<div class="hero-content"><h2>تعذّر تحميل الأخبار</h2><p>تحقق من اتصال الموقع بملف news.json.</p></div>';
+  console.error(error);
+ }
+}
+searchInput.addEventListener("input",()=>{visibleLimit=12;renderCards()});
+moreBtn.addEventListener("click",()=>{visibleLimit+=12;renderCards()});
+loadNews();
+</script>
+</body>
+</html>

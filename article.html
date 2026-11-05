@@ -366,13 +366,379 @@ img.syrian-flag {
 }
 </style>
 
+
+<style id="syria-article-reader-v1">
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #f1f3f6 !important;
+    color: #252932;
+    font-family: Arial, Tahoma, sans-serif;
+}
+
+body > header {
+    padding: 35px 16px !important;
+    background:
+        radial-gradient(ellipse at 50% 0%, #51452c 0%, transparent 60%),
+        linear-gradient(135deg, #0b0e13, #252a31 65%, #101216) !important;
+    border-bottom: 4px solid #c9a75b !important;
+}
+
+body > header h1 {
+    color: #f0dfb4 !important;
+    font-size: clamp(27px, 5vw, 40px) !important;
+    text-shadow: 0 3px 15px #0008;
+}
+
+body > header p {
+    color: #ded8cb !important;
+    font-size: 15px;
+}
+
+body > nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #171b21 !important;
+    border-bottom: 1px solid #c9a75b !important;
+    padding: 11px 8px !important;
+    box-shadow: 0 5px 18px #00000016;
+}
+
+body > nav a {
+    color: #f8f5ee !important;
+    padding: 9px 13px !important;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+body > nav a:hover {
+    background: #c9a75b !important;
+    color: #151515 !important;
+}
+
+.container {
+    width: min(900px, 100%) !important;
+    margin: 30px auto !important;
+    padding: 0 16px !important;
+}
+
+.article {
+    width: 100%;
+    padding: clamp(20px, 4vw, 42px) !important;
+    background: #fff !important;
+    color: #252932 !important;
+    border: 1px solid #e4e5e8 !important;
+    border-top: 4px solid #c9a75b !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 35px #18202b0d !important;
+}
+
+.article .category {
+    display: inline-block;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+    color: #795a1e !important;
+    background: #f8f1df !important;
+    border: 1px solid #eadbb7;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.article h2 {
+    margin: 12px 0 18px !important;
+    color: #171b22 !important;
+    font-size: clamp(25px, 5vw, 36px) !important;
+    line-height: 1.75 !important;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.article .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 12px;
+    padding: 13px 0 17px;
+    margin: 0 0 20px;
+    color: #737985 !important;
+    font-size: 14px;
+    line-height: 2;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.article img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 560px;
+    height: auto;
+    object-fit: contain;
+    margin: 20px auto 25px;
+    border-radius: 12px;
+    background: #f0f1f3;
+}
+
+.article .content {
+    color: #303640 !important;
+    font-size: clamp(18px, 2.5vw, 21px) !important;
+    line-height: 2.2 !important;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    text-align: right;
+    padding: 5px 0 15px;
+}
+
+.article video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 560px;
+    margin: 22px auto;
+    border-radius: 12px;
+    background: #111;
+}
+
+.article audio {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 22px 0;
+}
+
+.loading {
+    padding: 40px 15px;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+}
+
+.error {
+    padding: 22px;
+    background: #fff0f0;
+    color: #991b1b;
+    border: 1px solid #f2caca;
+    border-radius: 12px;
+}
+
+body > footer {
+    margin-top: 45px;
+    padding: 30px 15px !important;
+    background: #15191f !important;
+    color: #eee8dc !important;
+    border-top: 4px solid #c9a75b !important;
+}
+
+body > footer p {
+    margin: 7px 0;
+}
+
+body > footer a {
+    color: #ead7a2 !important;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 17px auto !important;
+        padding: 0 11px !important;
+    }
+
+    .article {
+        padding: 19px 16px !important;
+        border-radius: 11px !important;
+    }
+
+    .article h2 {
+        font-size: 25px !important;
+        line-height: 1.8 !important;
+    }
+
+    .article .content {
+        font-size: 18px !important;
+        line-height: 2.15 !important;
+    }
+
+    .article img {
+        border-radius: 9px;
+        margin: 16px auto 21px;
+    }
+
+    body > nav {
+        white-space: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
+    }
+
+    body > nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    body > nav a {
+        flex-shrink: 0;
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+</style>
+
+
+<style id="syria-article-dark-v2">
+* {box-sizing:border-box}
+html,body {background:#08090b!important;color:#e8eaed!important}
+body {font-family:Arial,Tahoma,sans-serif!important;line-height:1.9}
+body>header {
+  background:linear-gradient(120deg,#08090b,#20242b 65%,#101216)!important;
+  border-bottom:2px solid #a51f2b!important;
+  padding:32px 16px!important;
+}
+body>header h1 {color:#f1f2f4!important;font-size:clamp(27px,5vw,40px)!important}
+body>header p {color:#b6bbc4!important}
+body>nav {
+  background:#14171c!important;border-bottom:1px solid #343943!important;
+  position:sticky;top:0;z-index:20;padding:11px 8px!important
+}
+body>nav a {color:#e6e8eb!important;text-decoration:none;padding:9px 14px!important;border-radius:7px}
+body>nav a:hover {background:#a51f2b!important;color:#fff!important}
+.container {width:min(1000px,100%)!important;margin:30px auto!important;padding:0 16px!important}
+.article {
+  background:#14171c!important;color:#e8eaed!important;
+  border:1px solid #343943!important;border-top:4px solid #a51f2b!important;
+  border-radius:15px!important;padding:clamp(20px,4vw,44px)!important;
+  box-shadow:0 15px 45px #0006!important
+}
+.article .category {
+  display:inline-block;background:#35151b!important;color:#ff8991!important;
+  border:1px solid #762832!important;border-radius:6px;padding:5px 13px
+}
+.article h2 {
+  color:#f5f6f7!important;font-size:clamp(25px,5vw,39px)!important;
+  line-height:1.65!important;margin:15px 0!important;overflow-wrap:anywhere
+}
+.article .meta {
+  color:#aeb4be!important;border-bottom:1px solid #343943!important;
+  padding:12px 0 18px!important;line-height:2.1
+}
+.article .content {
+  color:#e0e3e8!important;font-size:clamp(18px,2.4vw,21px)!important;
+  line-height:2.25!important;white-space:pre-wrap!important;
+  overflow-wrap:anywhere!important;word-break:normal
+}
+.article img,.article video {
+  display:block;width:auto;max-width:100%;max-height:650px;
+  object-fit:contain;margin:20px auto;background:#090b0f;
+  border:1px solid #343943;border-radius:12px
+}
+.article audio {display:block;width:100%;max-width:600px;margin:20px 0}
+footer {
+  background:#0c0e12!important;color:#aeb4be!important;
+  border-top:1px solid #343943!important;margin-top:45px
+}
+footer p {color:#aeb4be!important}
+.error,.loading {background:#14171c!important;color:#e8eaed!important;border:1px solid #343943!important}
+@media(max-width:600px) {
+  .container {margin:17px auto!important;padding:0 11px!important}
+  .article {padding:19px!important;border-radius:11px!important}
+  .article h2 {font-size:25px!important}
+  .article .content {font-size:18px!important;line-height:2.15!important}
+  body>nav {overflow-x:auto;white-space:nowrap}
+  body>nav a {display:inline-block}
+}
+</style>
+
+
+<style id="snn-stars-identity">
+.snn-header {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(213,215,219,.10), transparent 65%),
+    linear-gradient(145deg,#08090b 0%,#171a20 55%,#090a0d 100%) !important;
+  border-bottom: 1px solid #343943 !important;
+  padding: 30px 14px 27px !important;
+  min-height: 0 !important;
+  text-align: center !important;
+  position: relative;
+}
+.snn-header .snn-identity {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-align: center;
+}
+.snn-stars {
+  color: #d5d7db;
+  font-size: 23px;
+  line-height: 1.2;
+  letter-spacing: 5px;
+  text-shadow: 0 0 13px rgba(213,215,219,.22);
+  direction: ltr;
+}
+.snn-stars span { color: #fff; }
+.snn-identity h1 {
+  color: #f1f2f4 !important;
+  font-size: clamp(27px,5vw,43px) !important;
+  font-weight: 900 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  letter-spacing: 0 !important;
+}
+.snn-english {
+  color: #aeb4be;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  direction: ltr;
+}
+.snn-identity p {
+  color: #a51f2b !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  margin: 2px 0 0 !important;
+}
+.snn-header .head-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.snn-header .brand {
+  display: block !important;
+  width: 100%;
+}
+@media(max-width:600px) {
+  .snn-header { padding: 24px 10px 21px !important; }
+  .snn-stars { font-size: 21px; }
+  .snn-identity h1 { font-size: 29px !important; }
+  .snn-english { font-size: 9px; letter-spacing: 2px; }
+}
+</style>
+
 </head>
 
 <body>
 
-<header>
-<h1> شبكة سوريا نيوز</h1>
-<p>صوت الحق والواقع</p>
+<header class="snn-header">
+<div class="snn-identity">
+  <div class="snn-stars" aria-label="ثلاث نجوم">★ <span>★</span> ★</div>
+  <h1>شبكة سوريا نيوز</h1>
+  <div class="snn-english">SYRIA NEWS NETWORK</div>
+  <p>صوت الحق والواقع</p>
+</div>
 </header>
 
 <nav>
@@ -439,13 +805,12 @@ async function loadArticle(){
 
         }
 
-        const news =
-            await response.json();
-
-        const item =
-            news.find(
-                n => String(n.id) === String(id)
-            );
+        const data = await response.json();
+        const news = Array.isArray(data) ? data :
+            (Array.isArray(data.news) ? data.news : []);
+        const item = news.find(
+            n => String(n.id) === String(id)
+        );
 
         if(!item){
 
