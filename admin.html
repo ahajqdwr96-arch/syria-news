@@ -186,6 +186,28 @@ img.syrian-flag {
   🔴 نشر كخبر عاجل لمدة 24 ساعة
 </label>
 
+<label>🗺️ المحافظة</label>
+<select id="governorate">
+    <option value="">اختر المحافظة</option>
+    <option value="دمشق">دمشق</option>
+    <option value="ريف دمشق">ريف دمشق</option>
+    <option value="حلب">حلب</option>
+    <option value="حمص">حمص</option>
+    <option value="حماة">حماة</option>
+    <option value="اللاذقية">اللاذقية</option>
+    <option value="طرطوس">طرطوس</option>
+    <option value="إدلب">إدلب</option>
+    <option value="الرقة">الرقة</option>
+    <option value="دير الزور">دير الزور</option>
+    <option value="الحسكة">الحسكة</option>
+    <option value="درعا">درعا</option>
+    <option value="السويداء">السويداء</option>
+    <option value="القنيطرة">القنيطرة</option>
+</select>
+
+<label>🏘️ المدينة أو البلدة</label>
+<input id="district" type="text" placeholder="مثال: منغ، اعزاز، الباب">
+
 <label>📍 المكان</label>
 <input
     id="location"
@@ -593,6 +615,8 @@ async function publishNews(){
         document.getElementById(
             "location"
         ).value.trim();
+    const governorate = document.getElementById("governorate").value;
+    const district = document.getElementById("district").value.trim();
 
     const source =
         document.getElementById(
@@ -717,6 +741,8 @@ async function publishNews(){
 
             location:
                 location,
+            governorate: governorate,
+            district: district,
 
             source:
                 source,
@@ -787,6 +813,8 @@ function clearForm(showMessage = true){
     document.getElementById(
         "location"
     ).value = "";
+    document.getElementById("governorate").value = "";
+    document.getElementById("district").value = "";
 
     document.getElementById(
         "source"
@@ -1013,8 +1041,7 @@ async function loadNewsManager(){
                 </p>
 
                 <small>
-                    ${item.location || ""}
-                    ${item.category ? " — " + item.category : ""}
+                    ${item.governorate || ""}${item.district ? " - " + item.district : ""}${item.location ? " — " + item.location : ""}${item.category ? " — " + item.category : ""}
                 </small>
 
                 <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
@@ -1154,6 +1181,18 @@ async function editNews(id){
             return;
         }
 
+        const newGovernorate = prompt(
+            "المحافظة:",
+            item.governorate || ""
+        );
+        if(newGovernorate === null) return;
+
+        const newDistrict = prompt(
+            "المدينة أو البلدة:",
+            item.district || ""
+        );
+        if(newDistrict === null) return;
+
         item.title =
             newTitle.trim();
 
@@ -1162,6 +1201,8 @@ async function editNews(id){
 
         item.location =
             newLocation.trim();
+        item.governorate = newGovernorate.trim();
+        item.district = newDistrict.trim();
 
         await saveNews(
             token,
