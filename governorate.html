@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المحافظات السورية | شبكة سوريا نيوز</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#08090b;color:#e3e4e6;font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+a{color:inherit;text-decoration:none}
+header{text-align:center;padding:28px 12px;background:linear-gradient(145deg,#171a20,#08090b);border-bottom:1px solid #303640}
+.stars{direction:ltr;color:#d5d9df;font-size:24px;letter-spacing:6px}
+.stars span{color:white}
+header h1{margin:0;color:white;font-size:clamp(28px,5vw,42px)}
+.english{direction:ltr;color:#aeb6c1;font-size:10px;font-weight:bold;letter-spacing:3px}
+header p{margin:3px;color:#d34b57;font-weight:bold}
+nav{display:flex;justify-content:center;gap:7px;padding:10px;background:#10141a;overflow-x:auto;white-space:nowrap}
+nav a{padding:8px 13px;color:#c5cbd4;font-size:13px}
+nav a:hover{background:#292b30;color:white}
+.wrap{width:min(1150px,100%);margin:auto;padding:24px 16px}
+.panel{background:linear-gradient(130deg,#1b2029,#11151b);border:1px solid #303743;border-radius:5px;padding:20px;margin-bottom:18px}
+h2{color:white;margin:0 0 8px}
+.muted{color:#aeb6c1;font-size:13px}
+.provinces{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}
+.province{display:block;text-align:center;padding:13px 5px;background:#20252d;border:1px solid #414954;border-radius:4px;font-weight:bold}
+.province:hover,.province.active{border-color:#a51f2b;background:#29232a}
+select,input{width:100%;padding:12px;background:#10141a;color:white;border:1px solid #414954;border-radius:4px;font:inherit;margin-top:10px}
+.news{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.card{background:#171a20;border:1px solid #303743;border-radius:5px;padding:15px}
+.card h3{color:#f4f5f7;font-size:18px}
+.card img{width:100%;max-height:270px;object-fit:cover;border-radius:4px}
+.category{color:#e3e4e6;border-right:3px solid #a51f2b;padding-right:8px;font-size:12px}
+.excerpt{color:#b9c0c9;font-size:13px}
+.meta{color:#929ba6;font-size:11px}
+.more{display:inline-block;background:#292b30;border:1px solid #414954;padding:7px 12px;margin-top:8px;font-size:12px}
+.empty{padding:20px;text-align:center;color:#aeb6c1;background:#171a20}
+footer{text-align:center;padding:22px;color:#aeb6c1;border-top:1px solid #303640}
+@media(max-width:750px){.provinces{grid-template-columns:repeat(2,1fr)}.news{grid-template-columns:1fr}.wrap{padding:15px 10px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="stars">★ <span>★</span> ★</div>
+<h1>شبكة سوريا نيوز</h1>
+<div class="english">SYRIA NEWS NETWORK</div>
+<p>صوت الحق والواقع</p>
+</header>
+
+<nav>
+<a href="index.html">الرئيسية</a>
+<a href="index.html#news">مركز الأخبار</a>
+<a href="breaking.html">🔴 الأخبار العاجلة</a>
+<a href="governorate.html">المحافظات السورية</a>
+<a href="news.html">التغطيات</a>
+<a href="https://t.me/suryainternetniuz">تلغرام</a>
+</nav>
+
+<main class="wrap">
+<section class="panel">
+<h2>المحافظات السورية</h2>
+<p class="muted">اختر المحافظة لمتابعة آخر الأخبار والتغطيات.</p>
+<div class="provinces" id="provinces"></div>
+</section>
+
+<section class="panel">
+<h2 id="title">اختر محافظة</h2>
+<p class="muted" id="description">الأخبار المنشورة ضمن المحافظة المختارة.</p>
+<select id="provinceSelect">
+<option value="">اختر المحافظة</option>
+</select>
+<input id="search" type="search" placeholder="ابحث ضمن أخبار المحافظة...">
+<p class="muted" id="count"></p>
+<div class="news" id="news">
+<div class="empty">اختر محافظة لعرض أخبارها.</div>
+</div>
+</section>
+</main>
+
+<footer>
+شبكة سوريا نيوز 🇸🇾
+<p>صوت الحق والواقع</p>
+</footer>
+
+<script>
+const provinces=[
+"دمشق","ريف دمشق","حلب","حمص","حماة","اللاذقية","طرطوس",
+"إدلب","الرقة","دير الزور","الحسكة","درعا","السويداء","القنيطرة"
+];
+
+const params=new URLSearchParams(location.search);
+let selected=params.get("name")||"";
+let items=[];
+
+const grid=document.getElementById("provinces");
+const select=document.getElementById("provinceSelect");
+const container=document.getElementById("news");
+const search=document.getElementById("search");
+
+provinces.forEach(name=>{
+const option=document.createElement("option");
+option.value=name;
+option.textContent=name;
+select.appendChild(option);
+
+const link=document.createElement("a");
+link.className="province";
+link.href="governorate.html?name="+encodeURIComponent(name);
+link.textContent=name;
+grid.appendChild(link);
+});
+
+select.addEventListener("change",()=>{
+if(select.value){
+location.href="governorate.html?name="+encodeURIComponent(select.value);
+}
+});
+
+function render(){
+container.replaceChildren();
+
+const term=search.value.trim().toLowerCase();
+
+const filtered=items.filter(item=>{
+const text=[
+item.title,item.content,item.district,item.location,item.category
+].filter(Boolean).join(" ").toLowerCase();
+
+return text.includes(term);
+});
+
+document.getElementById("count").textContent=
+"عدد الأخبار: "+filtered.length;
+
+if(!filtered.length){
+const empty=document.createElement("div");
+empty.className="empty";
+empty.textContent="لا توجد أخبار منشورة لهذه المحافظة حالياً.";
+container.appendChild(empty);
+return;
+}
+
+filtered.forEach(item=>{
+const card=document.createElement("article");
+card.className="card";
+
+const category=document.createElement("div");
+category.className="category";
+category.textContent=item.category||"سوريا";
+card.appendChild(category);
+
+const heading=document.createElement("h3");
+heading.textContent=item.title||"خبر بدون عنوان";
+card.appendChild(heading);
+
+if(item.image){
+const img=document.createElement("img");
+img.src=item.image;
+img.alt=item.title||"صورة الخبر";
+img.loading="lazy";
+card.appendChild(img);
+}
+
+const excerpt=document.createElement("p");
+excerpt.className="excerpt";
+const content=(item.content||"").trim();
+excerpt.textContent=content.length>220?
+content.slice(0,220)+"…":content;
+card.appendChild(excerpt);
+
+const more=document.createElement("a");
+more.className="more";
+more.href="article.html?id="+encodeURIComponent(item.id);
+more.textContent="اقرأ الخبر كاملًا ←";
+card.appendChild(more);
+
+const place=[item.governorate,item.district,item.location]
+.filter(Boolean).join(" - ");
+
+if(place){
+const meta=document.createElement("p");
+meta.className="meta";
+meta.textContent="📍 "+place;
+card.appendChild(meta);
+}
+
+container.appendChild(card);
+});
+}
+
+search.addEventListener("input",render);
+
+async function load(){
+if(!provinces.includes(selected)){
+document.getElementById("title").textContent="اختر محافظة";
+return;
+}
+
+select.value=selected;
+document.getElementById("title").textContent="أخبار محافظة "+selected;
+document.getElementById("description").textContent=
+"آخر الأخبار والتغطيات من محافظة "+selected;
+
+try{
+const response=await fetch("news.json?time="+Date.now());
+if(!response.ok) throw new Error("تعذر تحميل الأخبار");
+
+const data=await response.json();
+
+items=(Array.isArray(data)?data:[]).filter(item=>
+(item.governorate||"").trim()===selected
+);
+
+render();
+
+}catch(error){
+container.textContent="تعذر تحميل الأخبار. حاول تحديث الصفحة.";
+}
+}
+
+load();
+</script>
+
+</body>
+</html>
